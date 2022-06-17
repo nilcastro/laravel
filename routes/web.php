@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AutorizacionController;
+use App\Http\Controllers\EspecialesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
+
 
 use GuzzleHttp\Middleware;
 
@@ -33,11 +35,13 @@ Route::group(['Middleware' => 'auth'], function(){
     Route::get('proveedores', [ProveedoresController::class, 'index'])->name('proveedores');
     Route::get('productos', [ProductosController::class, 'index'])->name('productos');
     Route::get('autorizacion', [AutorizacionController::class, 'index'])->name('autorizacion');
+    Route::get('especial', [EspecialesController::class, 'index'])->name('especial');
     Route::get('ajax', [AutorizacionController::class, 'store'])->name('ajax');
     Route::resource('permissions', PermissionController::class);
     Route::resource('producto', ProductosController::class);
     Route::resource('proveedore', ProveedoresController::class);
     Route::resource('roles', RolesController::class);
+    // Route::resource('especiales', EspecialesController::class);
 
 });
 Route::get('solicitud/create', [SolicitudController::class, 'create'])->name('solicitud/create')->middleware('auth');

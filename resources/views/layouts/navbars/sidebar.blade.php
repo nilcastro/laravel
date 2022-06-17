@@ -19,6 +19,12 @@
           <p>{{ __('Solicitud de alimentación ') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'especial' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('especial') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Solicitud de especial') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'autorizacion' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('proveedores') }}">
           <i class="material-icons">library_books</i>
