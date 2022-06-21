@@ -28,7 +28,7 @@
                                                 <th class="text-rigth"></th>
                                             </thead>
                                             <tbody>
-                                                @foreach($permissions as $permission)
+                                                @forelse($permissions as $permission)
                                                 <tr>
                                                     <td>{{ $permission->id}}</td>
                                                     <td>{{ $permission->name}}</td>
@@ -48,7 +48,9 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                                @empty
+                                                No hay permisos registrados
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

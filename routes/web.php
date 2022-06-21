@@ -50,3 +50,5 @@ Route::post('productos/create', [ProductosController::class, 'store'])->name('pr
 Route::post('/productos/update,$producto->id', [ProductosController::class, 'update'])->name('/productos/update,$producto->id');
 Route::post('/proveedores/update,$producto->id', [ProveedoresController::class, 'update'])->name('/proveedores/update,$producto->id');
 Route::post('proveedores/create', [ProveedoresController::class, 'store'])->name('proveedores/create');
+//Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
+

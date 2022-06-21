@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -18,19 +19,19 @@ class RolesController extends Controller
         return view('roles.index', compact('role'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::all()->pluck('name', 'id');
+        //dd($permissions);
+        return view('roles.create',compact('permissions'));
     }
 
     public function store(Request $request)
     {
-        Role::create($request->only('name'));
+       $role = Role::create($request->only('name'));
+       
+       $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('roles.index');
     }
@@ -42,15 +43,12 @@ class RolesController extends Controller
  
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit(Role $role)
     {
-        return view('roles.edit', compact($role));
+        $role = $role->all()->pluck('name','id');
+       // dd($role);
+        return view('roles.edit', compact('role'));
   
     }
    

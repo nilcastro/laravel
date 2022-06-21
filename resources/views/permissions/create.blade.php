@@ -13,9 +13,9 @@
                             </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <label for="name"class="col-sm-12 col-fomr-label" > Nombre del peermiso </label>
+                                        <label for="name"class="col-sm-12 col-fomr-label" > Nombre del permiso </label>
                                         <div class="col-sm-7">
-                                           <input type="text"class="form-control" name="name" >  
+                                           <input type="text"class="form-control" name="name" autofocus>  
                                         </div>
                                     </div>
                                  </div>

@@ -7,11 +7,7 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function index()
     {
         $permissions = Permission::paginate(5);
@@ -25,21 +21,16 @@ class PermissionController extends Controller
      */
     public function create()
     {
-
+       $permissions = Permission::all()->pluck('name', 'id');
+        
         return view('permissions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {   
-  
        
-    // dd($datosSolicitud);
+     //dd($request);
         Permission::create($request->only('name'));
 
         return redirect()->route('permissions.index');
@@ -51,15 +42,12 @@ class PermissionController extends Controller
         return view('permissions.show', compact('permission'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit(permission $permission)
     {
-        return view('permissions.edit', compact($permission));
+        $permission = $permission->all();
+     //dd($permission);
+        return view('permissions.edit', compact('permission'));
     }
 
 
@@ -70,12 +58,7 @@ class PermissionController extends Controller
         return redirect()->route('permission.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Permission $permission)
     {
         $permission->delete();

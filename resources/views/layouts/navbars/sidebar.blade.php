@@ -31,10 +31,10 @@
           <p>{{ __('Autorización ') }}</p>
         </a>
       </li>
-        <a class="nav-link" data-toggle="collapse" href="#provee" aria-expanded="true">
+        <!-- <a class="nav-link" data-toggle="collapse" href="#provee" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('img/laravel.svg') }}"></i>
           <p>{{ __('proveedores y productos') }} <b class="caret"></b></p>
-        </a>
+        </a> -->
       <div class="collapse show " id="provee" aria-expanded="false">
         <ul class="nav">
           <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
@@ -51,12 +51,12 @@
           </li>
         </ul>
       </div>
-        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
+        <!-- <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
           <i><img style="width:25px" src="{{ asset('img/laravel.svg') }}"></i>
           <p>{{ __('Admin de Usuarios.') }}
             <b class="caret"></b>
           </p>
-        </a>
+        </a> -->
         <div class="collapse show" id="laravelExample" aria-expanded="true">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
