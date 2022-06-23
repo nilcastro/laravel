@@ -13,7 +13,7 @@ class SolicitudController extends Controller
    
     public function index()
     {
-       
+      // dd('hola');
         return view('solicitud/index');
     }
 
@@ -31,6 +31,7 @@ class SolicitudController extends Controller
 
     public function store(Request $request)
     {
+        dd('siaaaa');
         $datosSolicitud = request()->except('_token');
          //dd($datosSolicitud);
          $proveedores = solicitud::firstOrCreate($datosSolicitud);

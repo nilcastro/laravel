@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AutorizacionController;
@@ -9,8 +10,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
-
-
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -36,11 +36,12 @@ Route::group(['Middleware' => 'auth'], function(){
     Route::get('productos', [ProductosController::class, 'index'])->name('productos');
     Route::get('autorizacion', [AutorizacionController::class, 'index'])->name('autorizacion');
     Route::get('especial', [EspecialesController::class, 'index'])->name('especial');
-    Route::get('ajax', [AutorizacionController::class, 'store'])->name('ajax');
+  
     Route::resource('permissions', PermissionController::class);
     Route::resource('producto', ProductosController::class);
     Route::resource('proveedore', ProveedoresController::class);
     Route::resource('roles', RolesController::class);
+    Route::resource('user', UserController::class);
     // Route::resource('especiales', EspecialesController::class);
 
 });
@@ -50,5 +51,9 @@ Route::post('productos/create', [ProductosController::class, 'store'])->name('pr
 Route::post('/productos/update,$producto->id', [ProductosController::class, 'update'])->name('/productos/update,$producto->id');
 Route::post('/proveedores/update,$producto->id', [ProveedoresController::class, 'update'])->name('/proveedores/update,$producto->id');
 Route::post('proveedores/create', [ProveedoresController::class, 'store'])->name('proveedores/create');
+Route::post('/roles/update,$role->id', [RolesController::class, 'update'])->name('/roles/update,$roles->id');
+
+Route::post('/solicitud/ajax.consulta', [AjaxController::class,'index'])->name('ajax.consulta');
+
 //Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
 

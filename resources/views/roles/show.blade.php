@@ -28,6 +28,13 @@
                                                     </p>
                                                    </div>
                                                </p>
+                                               <div class="card-description">
+                                                  @forelse ($role->permissions as $permission) 
+                                                  <span class="badge rounded-pill bg-dark text.while">{{$permission->name}}</span>
+                                                  @empty
+                                                  <span class="badge badge-danger  bg-danger">no tiene permisos</span>
+                                                  @endforelse
+                                               </div>
                                                <div class="crad-footer">
                                                    <div class="button-container">
                                                         <button class="btn btn-sm btn-primary ">Editar </button>

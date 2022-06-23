@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\View\Component;
+use PHPUnit\Framework\MockObject\Stub\ReturnReference;
+use Spatie\Permission\Models\Role;
+
+
+
 
 class UserController extends Controller
 {
@@ -13,29 +20,29 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = user::paginate(5);
-        return view('user.index', compact('user'));
+        $users = user::paginate(5);
+        return view('user.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
-        //
+        
+        $role = Role::all()->pluck('name','id');
+        return view ('user.create', Compact('role'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        //dd('hola');
+        $user = User::create($request->only('name', 'email' )
+        +[
+            'password' => bcrypt($request->input('password')),
+        ]);
+        $role =$request->input('role',[]);
+        $user->syncRoles($role);
+        return redirect()->route('user.show', $user->id)->with('success', 'usuario registrado');
     }
 
     /**
@@ -44,9 +51,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(user $user)
     {
-        //
+        $user->load('roles');
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -55,9 +63,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(user $user)
     {
-        //
+        $roles = role::all()->pluck('name','id');
+        $user->load('roles');
+
+        return view('user.edit', compact('user','roles'));
     }
 
     /**

@@ -31,7 +31,7 @@ class RolesController extends Controller
     {
        $role = Role::create($request->only('name'));
        
-       $role->permissions()->sync($request->input('permissions', []));
+       $role->permissions()->syncPermissions($request->input('permissions', []));
 
         return redirect()->route('roles.index');
     }
@@ -39,6 +39,7 @@ class RolesController extends Controller
     
     public function show(Role $role)
     {
+        $role->load('permissions');
         return view('roles.show', compact('role'));
  
     }
@@ -46,9 +47,10 @@ class RolesController extends Controller
    
     public function edit(Role $role)
     {
-        $role = $role->all()->pluck('name','id');
+        $permissions = Permission::all()->pluck('name','id');
+        $role->load('permissions');
        // dd($role);
-        return view('roles.edit', compact('role'));
+        return view('roles.edit', compact('role','permissions'));
   
     }
    
@@ -56,8 +58,9 @@ class RolesController extends Controller
     public function update(Request $request, Role $role)
     {
         $role->update($request->only('name'));
+        $role->permissions()->syncPermissions( $request->input('permissions', []));
 
-        return redirect()->route('roles.index', compact($role));
+        return redirect()->route('roles.index' );
   
     }
 

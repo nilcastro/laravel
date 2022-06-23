@@ -4,8 +4,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-      <form action="{{ url('/solicitud') }}" method="post" enctype="multipart/form-data">
-        @csrf
+        <form action="{{ url('/solicitud') }}" method="post" enctype="multipart/form-data" id="form1">
+          @csrf
           <div class="card">
             <div class="card-header card-header-primary">
               <h4 class="card-title">Información general </h4>
@@ -57,13 +57,13 @@
                   </div>
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">Nombre de quien autoriza:</strong>
-                    <select  name="nombreauto" id="nombreauto" onchange="nombr()"  class="form-control" >
-                   <option value="">--Indique el nombre de quien autoriza--</option>
-                    @foreach($autorizas as $autoriza)
-                    <option value="{{$autoriza->name}}">{{$autoriza->name}}</option><br>
-                   
-                    @endforeach
-                  </select>
+                    <select name="nombreauto" id="nombreauto" onchange="nombreat()" class="nombreauto">
+                      <option value="">--Indique el nombre de quien autoriza--</option>
+                      @foreach($autorizas as $autoriza)
+                      <option value="{{$autoriza->name}}">{{$autoriza->name}}</option><br>
+
+                      @endforeach
+                    </select>
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Nombre de jefe que autoriza:</strong>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
               </div>
-           
+
               <div class=" card-body"><br>
                 <div class="alert alert-primary alert-dismissible" role="alert">
                   <h4>Sobre el concesionario o proveedor</h4>
@@ -98,11 +98,11 @@
                       <strong for="nombre" class="form-label">Nombre del concesionario o proveedor:</strong>
                       <select name="Nombreprove" id="Nombreprove" class="form-control">
                         <option value="">--Selecciona un proveedor</option>
-                      @foreach($proveedores as $proveedor)
-                      <option value="{{ $proveedor->nombreProvee }}">{{ $proveedor->nombreProvee }}</option>
-                      @endforeach
+                        @foreach($proveedores as $proveedor)
+                        <option value="{{ $proveedor->nombreProvee }}">{{ $proveedor->nombreProvee }}</option>
+                        @endforeach
                       </select>
-                     
+
                     </div>
                     <div class="col">
                       <strong for="correo" class="form-label">Correo institucional:</strong>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col">
                       <strong for="Cargo" class="form-label">Teléfono de contacto 1:</strong>
-                      <input type="text" name="telefonouno" value=""  class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
+                      <input type="text" name="telefonouno" value="" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col">
                       <strong for="Cargo" class="form-label">Teléfono de contacto 2:</strong>
-                      <input type="text" name="telefonodos" value=""  class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
+                      <input type="text" name="telefonodos" value="" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
                     </div>
                   </div>
 
@@ -140,7 +140,7 @@
                   <div class="card">
                     <div class="card-header card-header-primary">
                       <h4 class="card-title ">Solicitud del servicio de alimentación y bebidas</h4>
-                    
+
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -151,35 +151,77 @@
                               <th>Hora</th>
                               <th>Lugar</th>
                               <th>Producto a entregar</th>
-                              <th>Cantidad</th>
-                              <th>Valor unitario</th>
-                              <th>Valor total</th>
-                              <th>Recibe a satisfacción</th>
+                            </tr>
+
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td> <input type="date" name="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
+                                                                                                              echo $hoy; ?> max="2030-09-15" aria-label="Cargo">
+                              </td>
+                              <td>
+                                <input type="time" name="horauno" value="" class="form-control" aria-label="Cargo">
+                              </td>
+                              <td> <input type="text" name="lugaruno" id="lugaruno"></td>
+                              <td><input type="text" name="producto" id=""></td>
+                            </tr>
+                            <thead class=" text-primary">
+                              <tr>
+                                <th>Cantidad</th>
+                                <th>Valor unitario</th>
+                                <th>Valor total</th>
+                                <th>Recibe a satisfacción</th>
+                              </tr>
+                            </thead>
+                            <tr>
+                              <td class="text-primary"><input type="number" name="cantidad" id=""></td>
+                              <td><input type="number" name="valorunid" id=""></td>
+                              <td><input type="number" name="valortota" id=""></td>
+                              <td><input type="text" name="recibe" id=""></td>
+                          </tbody>
+                        </table>
+                      </div>
+                      <hr>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead class=" text-primary">
+                            <tr>
+                              <th>Fecha</th>
+                              <th>Hora</th>
+                              <th>Lugar</th>
+                              <th>Producto a entregar</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <td> <input type="date" name="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
-                                                                                                echo $hoy; ?> max="2030-09-15" aria-label="Cargo">
+                                                                                                              echo $hoy; ?> max="2030-09-15" aria-label="Cargo">
                               </td>
-                              <td>  <input type="time" name="horauno" value="" class="form-control" aria-label="Cargo"></td>
+                              <td>
+                                <input type="time" name="horauno" value="" class="form-control" aria-label="Cargo">
+                              </td>
                               <td> <input type="text" name="lugaruno" id="lugaruno"></td>
                               <td><input type="text" name="producto" id=""></td>
+                            </tr>
+                            <thead class=" text-primary">
+                              <tr>
+                                <th>Cantidad</th>
+                                <th>Valor unitario</th>
+                                <th>Valor total</th>
+                                <th>Recibe a satisfacción</th>
+                              </tr>
+                            </thead>
+                            <tr>
                               <td class="text-primary"><input type="number" name="cantidad" id=""></td>
                               <td><input type="number" name="valorunid" id=""></td>
                               <td><input type="number" name="valortota" id=""></td>
                               <td><input type="text" name="recibe" id=""></td>
-                              
-                            </tr>
-                           
-                            
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
-                
                 <div>
                   <input class="form-control" type="hidden" id="estado" name="estado" value="Pendiente">
                 </div>
@@ -189,17 +231,70 @@
                   </div> <br>
                   <div class="col"> <a href="{{ url('solicitud/') }}" class="btn btn-primary">Regresar</a></div>
                 </div>
-               </div>
+              </div>
             </div>
           </div>
         </form>
       </div>
+
       @endsection
-     <script>
-     function autoriza(){
-        var x = document.getElementById("nombr").value;
-         console.log(x);
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+      </script>
+      <script>
+          function nombreat(){
+                let  si =  document.getElementById('nombreauto');
+                let no =si.value;
+                console.log(no );
+                $.ajax({
+                  url:'/ajax.consulta',
+                  method: 'POST',
+                  data:$("#form1").serialize()
+                  }).done(function(res){
+                    alert(res)
+                });
+               }
+        $(document).ready(function() {
+
+        
+
+
+          // ------------------------------
+          //alert("hola");
+          // $(".nombreauto").on('change', function() {
+          //   var si = $(".nombreauto").val();
+          //   console.log(si);
+          //   var url = $(this).attr('action')
+          //   $.ajax({
+          //     url: "{{ route('ajax.consulta')}}",
+          //     type: 'POST',
+          //     data: $("#form1").serialize(),
            
-       
-      };
-     </script>
+          //   })/* .done(function(res) {
+          //     alert(res)
+          //   }) */
+          });
+
+
+          // -----------------------------------------
+            // $.get('/ajax/conuslta' , {si: si}, function(autoriza){
+            //     $('#autoriza').empty();
+            //     $('#autoriza').append ( "<option value=''>sleectciona </option>");
+            //     $.each(autoriza, function(index, value) {
+            //       $('#autoriza').append ( "<option value='"+index +"'>"+value+" </option>");
+            //     })
+
+            // });
+          // 
+        // });
+        //console.log(no);
+        // })
+
+        
+
+
+
+
+
+
+        //  document.getElementById('autoriza').innerText = ${};
+      </script>
