@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -11,34 +12,32 @@ class AjaxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(request $request)
+    public function index(Request $request)
     {
-    dd('hola');
-        
-    //    if($request->ajax()){
-    //        dd('hola si es ajax');
-    //    }
+    
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
+        //dd($request);
+       // $nombre = $request->nombreauto;
+        if($request->ajax()){
+            $animales = DB::select('CALL spsel_id()');
+            return response($animales);
+        // $nombre = \DB::table('users')
+        //             ->select('username')
+        //             ->where('name', '=',$nombre )
+        //             ->get();
+        //$nombres = $nombre->username;
        
+        }
     }
 
     /**

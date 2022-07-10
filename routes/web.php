@@ -53,7 +53,7 @@ Route::post('/proveedores/update,$producto->id', [ProveedoresController::class, 
 Route::post('proveedores/create', [ProveedoresController::class, 'store'])->name('proveedores/create');
 Route::post('/roles/update,$role->id', [RolesController::class, 'update'])->name('/roles/update,$roles->id');
 
-Route::post('/solicitud/ajax.consulta', [AjaxController::class,'index'])->name('ajax.consulta');
+Route::post('ajax/consulta', [AjaxController::class,'store'])->name('ajax.consulta');
 
 //Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
 

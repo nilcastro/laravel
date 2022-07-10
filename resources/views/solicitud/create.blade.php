@@ -34,11 +34,13 @@
                     <strong for="dia" class="form-label">Duración de la actividad(Horas):</strong>
                     <input type="number" name="duracion" id="duracion" value="" class="form-control" placeholder="Indique las horas de duración del evento ">
                   </div>
+                <!-- //  <input type="range"from ="2019-01-01" to="2019-02-14"> -->
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Fecha inicio de la activiad:</strong>
                     <input type="date" name="fechain" id="fechain" value="" min=<?php $hoy = date("Y-m-d");
                                                                                 echo $hoy; ?> max="2030-09-15" class="form-control" placeholder="Indique las horas de duración del evento ">
                   </div>
+
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Fecha fin de la actividad:</strong>
                     <input type="date" name="fechafi" id="fechafi" value="" min=<?php $hoy = date("Y-m-d");
@@ -53,7 +55,7 @@
                 <div class="col-md-6">
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">ID quien autoriza:</strong>
-                    <input type="numbre" id="autoriza" name="autoriza" class="form-control" placeholder="ID de quien autoriza">
+                    <input type="numbre" id="autoriza" name="autoriza" value="" class="form-control" placeholder="ID de quien autoriza">
                   </div>
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">Nombre de quien autoriza:</strong>
@@ -241,39 +243,39 @@
       <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
       </script>
       <script>
-          function nombreat(){
-                let  si =  document.getElementById('nombreauto');
-                let no =si.value;
-                console.log(no );
-                $.ajax({
-                  url:'/ajax.consulta',
-                  method: 'POST',
-                  data:$("#form1").serialize()
-                  }).done(function(res){
-                    alert(res)
-                });
-               }
-        $(document).ready(function() {
+          // function nombreat(){
+          //       let  si =  document.getElementById('nombreauto');
+          //       let no =si.value;
+          //       console.log(no );
+          //       $.ajax({
+          //         url:'/ajax.consulta',
+          //         method: 'POST',
+          //         data:$("#form1").serialize()
+          //         }).done(function(res){
+          //           alert(res)
+          //       });
+          //      }
 
-        
-
-
-          // ------------------------------
-          //alert("hola");
-          // $(".nombreauto").on('change', function() {
-          //   var si = $(".nombreauto").val();
-          //   console.log(si);
-          //   var url = $(this).attr('action')
-          //   $.ajax({
-          //     url: "{{ route('ajax.consulta')}}",
-          //     type: 'POST',
-          //     data: $("#form1").serialize(),
+           // ------------------------------
+        $(document).ready(function() { 
+         
+         // alert("hola");
+          $(".nombreauto").on('change', function() {
+            var si = $(".nombreauto").val();
+            console.log(si);
+            var url = $(this).attr('action')
+            $.ajax({
+              url: "{{ route('ajax.consulta')}}",
+              type: 'POST',
+              data: $("#form1").serialize(),
            
-          //   })/* .done(function(res) {
-          //     alert(res)
-          //   }) */
-          });
+            }).done(function(res) {
+              alert(res)
+              document.getElementById("autoriza").value= res;
 
+            }) 
+          });
+        });
 
           // -----------------------------------------
             // $.get('/ajax/conuslta' , {si: si}, function(autoriza){
@@ -285,16 +287,10 @@
 
             // });
           // 
-        // });
+       
         //console.log(no);
         // })
 
         
-
-
-
-
-
-
         //  document.getElementById('autoriza').innerText = ${};
       </script>
