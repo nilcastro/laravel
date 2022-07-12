@@ -13,7 +13,8 @@ class SolicitudController extends Controller
    
     public function index()
     {
-      // dd('hola');
+     
+        //dd($solicitud);
         return view('solicitud/index');
     }
 
@@ -21,22 +22,25 @@ class SolicitudController extends Controller
     public function create()
     {
          $autorizas = user::all();
-        //dd($autoriza);
+        //dd($autorizas);
         $proveedores =DB::table('proveedores')
-                        ->select('nombreProvee')
+                        ->select('nombreProvee','id')
                         ->get();
-          //dd($proveedores);
-        return view('solicitud/create', compact('autorizas','proveedores'));
+        $productos =\DB::table('productos')
+                        ->select('nombreProduc','precio','id')
+                        ->get();              
+         // dd($productos);
+        return view('solicitud/create', compact('autorizas','proveedores','productos'));
     }
 
     public function store(Request $request)
     {
-        dd('siaaaa');
+        
         $datosSolicitud = request()->except('_token');
-         //dd($datosSolicitud);
+         dd($datosSolicitud);
          $proveedores = solicitud::firstOrCreate($datosSolicitud);
         
-         return redirect('proveedores');
+         return redirect('autorizacion');
     }
 
  

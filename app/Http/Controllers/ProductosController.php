@@ -44,7 +44,7 @@ class ProductosController extends Controller
         
 
         $productos = Productos::firstOrCreate($productos);
-     
+
         return redirect('productos');
     }
 

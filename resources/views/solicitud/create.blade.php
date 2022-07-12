@@ -24,7 +24,7 @@
                 <div class="col-md-6 ">
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">Fecha de la solicitud:</strong>
-                    <input type="date" name="dia" readonly value="<?php echo date("Y-m-d") ?>" class="form-control" placeholder="Fecha del viaje">
+                    <input type="date" name="dia" readonly value="<?php echo date("Y-m-d")?>" class="form-control" placeholder="Fecha del viaje">
                   </div>
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">Breve descripción del evento o actividad:</strong>
@@ -32,18 +32,18 @@
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Duración de la actividad(Horas):</strong>
-                    <input type="number" name="duracion" id="duracion" value="" class="form-control" placeholder="Indique las horas de duración del evento ">
+                    <input type="number" name="duracion" id="duracion" value="" class="form-control" placeholder="Indique el número de horas para realizar del evento ">
                   </div>
-                <!-- //  <input type="range"from ="2019-01-01" to="2019-02-14"> -->
+                
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Fecha inicio de la activiad:</strong>
+                    <strong for="fechain" class="form-label">Fecha inicio de la activiad:</strong>
                     <input type="date" name="fechain" id="fechain" value="" min=<?php $hoy = date("Y-m-d");
                                                                                 echo $hoy; ?> max="2030-09-15" class="form-control" placeholder="Indique las horas de duración del evento ">
                   </div>
 
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Fecha fin de la actividad:</strong>
-                    <input type="date" name="fechafi" id="fechafi" value="" min=<?php $hoy = date("Y-m-d");
+                    <input type="date" name="fechafi" id="fechafi" value="fechafi" min=<?php $hoy = date("Y-m-d");
                                                                                 echo $hoy; ?> max="2030-09-15" class="form-control" placeholder="Indique las horas de duración del evento ">
                   </div>
                   <div class="col mt-4">
@@ -55,11 +55,11 @@
                 <div class="col-md-6">
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">ID quien autoriza:</strong>
-                    <input type="numbre" id="autoriza" name="autoriza" value="" class="form-control" placeholder="ID de quien autoriza">
+                    <input type="numbre" id="autoriza" name="autoriza" value="" readonly class="form-control" placeholder="ID de quien autoriza">
                   </div>
                   <div class="col  mt-4">
                     <strong for="dia" class="form-label">Nombre de quien autoriza:</strong>
-                    <select name="nombreauto" id="nombreauto" onchange="nombreat()" class="nombreauto">
+                    <select name="nombreauto" id="nombreauto" class="form-control">
                       <option value="">--Indique el nombre de quien autoriza--</option>
                       @foreach($autorizas as $autoriza)
                       <option value="{{$autoriza->name}}">{{$autoriza->name}}</option><br>
@@ -69,23 +69,23 @@
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Nombre de jefe que autoriza:</strong>
-                    <input type="text" name="jefeautori" id="jefeautori" value="" class="form-control" placeholder="Indique el nombre del jefe autorizador ">
+                    <input type="text" name="jefeautori" id="jefeautori" readonly value="" class="form-control" placeholder="Indique el nombre del jefe autorizador ">
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Centro de costos:</strong>
-                    <input type="text" name="centrocosto" id="centrocosto" value="" class="form-control" placeholder="Indique el centro de costos ">
+                    <input type="text" name="centrocosto" id="centrocosto" value="" readonly class="form-control" placeholder="Indique el centro de costos ">
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Correo electronico:</strong>
-                    <input type="text" name="correoautori" id="correoautori" value="" class="form-control" placeholder="Indique el correo electronico ">
+                    <input type="text" name="correoautori" id="correoautori" value="{{ Auth::user()->email }}" class="form-control" placeholder="Indique el correo electronico ">
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Solicitud realizada por:</strong>
-                    <input type="text" name="nombresolici" id="nombresolici" value="" class="form-control" placeholder="Indique el nombre de la persona que solicita el servicio ">
+                    <input type="text" name="nombresolici" id="nombresolici" value="{{ Auth::user()->name }}{{ Auth::user()->apellidos }}" class="form-control" placeholder="Indique el nombre de la persona que solicita el servicio ">
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Persona que recibe:</strong>
-                    <input type="text" name="recibe" id="recibe" value="{{ Auth::user()->username }}" class="form-control" placeholder="Indique el nombre de la persona que recibe.">
+                    <input type="text" name="recibe" id="recibe" value="" class="form-control" placeholder="Indique el nombre de la persona que recibe">
                   </div>
                 </div>
               </div>
@@ -98,7 +98,7 @@
                   <div class="col-md-4">
                     <div class="col">
                       <strong for="nombre" class="form-label">Nombre del concesionario o proveedor:</strong>
-                      <select name="Nombreprove" id="Nombreprove" class="form-control">
+                      <select name="Nombreprove" id="Nombreprove" class="form-control" class="Nombreprove">
                         <option value="">--Selecciona un proveedor</option>
                         @foreach($proveedores as $proveedor)
                         <option value="{{ $proveedor->nombreProvee }}">{{ $proveedor->nombreProvee }}</option>
@@ -112,27 +112,27 @@
                     </div>
                     <div class="col">
                       <strong for="correo" class="form-label">Teléfono:</strong>
-                      <input type="text" name="Teléfono" value="" class="form-control" id="correo" placeholder="Digite su teléfono">
+                      <input type="text" name="Teléfono" value="" class="form-control" id="Teléfono" placeholder="Digite su teléfono">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="col">
                       <strong for="nombre" class="form-label">Nombre de contacto 1:</strong>
-                      <input type="text" name="nombrecontactouno" value="" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
+                      <input type="text" name="nombrecontactouno" id="nombrecontactouno" value="" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
                     </div>
                     <div class="col">
                       <strong for="Cargo" class="form-label">Teléfono de contacto 1:</strong>
-                      <input type="text" name="telefonouno" value="" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
+                      <input type="text" name="telefonouno" value="" id="telefonouno" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="col">
                       <strong for="nombre" class="form-label">Nombre de contacto 2:</strong>
-                      <input type="text" name="nombrecontactodos" value="" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
+                      <input type="text" name="nombrecontactodos" id="nombrecontactodos" value="" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
                     </div>
                     <div class="col">
                       <strong for="Cargo" class="form-label">Teléfono de contacto 2:</strong>
-                      <input type="text" name="telefonodos" value="" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
+                      <input type="text" name="telefonodos" id="telefonodos" value="" class="form-control" placeholder="Digite su cargo" >
                     </div>
                   </div>
 
@@ -146,6 +146,21 @@
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
+                        <div class="row">
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>
+
+                        </div>
                         <table class="table">
                           <thead class=" text-primary">
                             <tr>
@@ -158,14 +173,21 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td> <input type="date" name="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
-                                                                                                              echo $hoy; ?> max="2030-09-15" aria-label="Cargo">
-                              </td>
+                              <td> <input type="date" name="fechasoliciuno" id="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
+                                                                                                              echo $hoy; ?> max="2030-09-15" class="form-control" aria-label="Cargo">
+                              
+                            </td>
                               <td>
-                                <input type="time" name="horauno" value="" class="form-control" aria-label="Cargo">
+                                <input type="time" name="horauno" id="horauno" value="horauno" class="form-control" aria-label="Cargo">
                               </td>
-                              <td> <input type="text" name="lugaruno" id="lugaruno"></td>
-                              <td><input type="text" name="producto" id=""></td>
+                              <td> <input type="text" name="lugaruno" id="lugaruno" value="" class="form-control"></td>
+                              <td><select type="text" name="producto" id="producto" value="" class="form-control">
+                                  <option value="">--Selecciona un producto</option>
+                                  @foreach($productos as $producto)
+                                  <option value="{{ $producto->id }}">{{ $producto->nombreProduc }}</option>
+                                  @endforeach
+                                </select>
+                              </td>
                             </tr>
                             <thead class=" text-primary">
                               <tr>
@@ -176,51 +198,17 @@
                               </tr>
                             </thead>
                             <tr>
-                              <td class="text-primary"><input type="number" name="cantidad" id=""></td>
-                              <td><input type="number" name="valorunid" id=""></td>
-                              <td><input type="number" name="valortota" id=""></td>
-                              <td><input type="text" name="recibe" id=""></td>
+                            <td><input type="number" name="cantidad" id="cantidad" value=""  class="form-control"></td>
+                            <td><input type="number" name="valorunid" id="valorunid"value="" class="form-control"></td>
+                              <td><input type="number" name="valortota" id="valortota" value="" class="form-control"></td>
+                              <td><input type="text" name="recibe" id="recibe" value="" class="form-control"></td>
+                              
                           </tbody>
                         </table>
                       </div>
-                      <hr>
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead class=" text-primary">
-                            <tr>
-                              <th>Fecha</th>
-                              <th>Hora</th>
-                              <th>Lugar</th>
-                              <th>Producto a entregar</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td> <input type="date" name="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
-                                                                                                              echo $hoy; ?> max="2030-09-15" aria-label="Cargo">
-                              </td>
-                              <td>
-                                <input type="time" name="horauno" value="" class="form-control" aria-label="Cargo">
-                              </td>
-                              <td> <input type="text" name="lugaruno" id="lugaruno"></td>
-                              <td><input type="text" name="producto" id=""></td>
-                            </tr>
-                            <thead class=" text-primary">
-                              <tr>
-                                <th>Cantidad</th>
-                                <th>Valor unitario</th>
-                                <th>Valor total</th>
-                                <th>Recibe a satisfacción</th>
-                              </tr>
-                            </thead>
-                            <tr>
-                              <td class="text-primary"><input type="number" name="cantidad" id=""></td>
-                              <td><input type="number" name="valorunid" id=""></td>
-                              <td><input type="number" name="valortota" id=""></td>
-                              <td><input type="text" name="recibe" id=""></td>
-                          </tbody>
-                        </table>
-                      </div>
+                      <hr><br>
+                    
+                     
                     </div>
                   </div>
                 </div>
@@ -243,54 +231,141 @@
       <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
       </script>
       <script>
-          // function nombreat(){
-          //       let  si =  document.getElementById('nombreauto');
-          //       let no =si.value;
-          //       console.log(no );
-          //       $.ajax({
-          //         url:'/ajax.consulta',
-          //         method: 'POST',
-          //         data:$("#form1").serialize()
-          //         }).done(function(res){
-          //           alert(res)
-          //       });
-          //      }
+        const fechain = document.getElementById('fechain');
 
-           // ------------------------------
-        $(document).ready(function() { 
-         
-         // alert("hola");
-          $(".nombreauto").on('change', function() {
-            var si = $(".nombreauto").val();
+        window.addEventListener('load', function() {
+
+          if (fechain) {
+            fechain.addEventListener('click', function() {
+              alert("hola");
+              console.log(fechain);
+            });
+          }
+
+
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+
+          // alert("hola");
+          $("#nombreauto").on('change', function() {
+            var si = $("#nombreauto").val();
             console.log(si);
             var url = $(this).attr('action')
             $.ajax({
               url: "{{ route('ajax.consulta')}}",
               type: 'POST',
               data: $("#form1").serialize(),
-           
-            }).done(function(res) {
-              alert(res)
-              document.getElementById("autoriza").value= res;
 
-            }) 
+            }).done(function(res) {
+              $jefe = res[0].nombre_jefe + res[0].apellido_jefe
+              // alert($jefe)
+              document.getElementById("autoriza").value = res[0].username;
+              document.getElementById("jefeautori").value = $jefe;
+              document.getElementById("centrocosto").value = res[0].programa;
+            })
           });
         });
+      </script>
+      <script>
+        $(document).ready(function() {
 
-          // -----------------------------------------
-            // $.get('/ajax/conuslta' , {si: si}, function(autoriza){
-            //     $('#autoriza').empty();
-            //     $('#autoriza').append ( "<option value=''>sleectciona </option>");
-            //     $.each(autoriza, function(index, value) {
-            //       $('#autoriza').append ( "<option value='"+index +"'>"+value+" </option>");
-            //     })
+          //alert("hola");
+          $("#Nombreprove").on('change', function() {
+            var s = $("#Nombreprove").val();
+            //alert("hola");
+            console.log(s);
+            var url = $(this).attr('action')
+            $.ajax({
+              url: "{{ route('ajax.register')}}",
+              type: 'POST',
+              data: $("#form1").serialize(),
+              success: function(res) {
+                // console.log(res[0].precio);
+                document.getElementById("Correoelectroni").value = res[0].correoProvee;
+                document.getElementById("Teléfono").value = res[0].telProvee;
+                document.getElementById("nombrecontactouno").value = res[0].nombreContac;
+                document.getElementById("telefonouno").value = res[0].telProvee;
+              }
+            })
+          });
 
-            // });
-          // 
-       
-        //console.log(no);
-        // })
+        });
+      </script>
 
+      <script>
+        $(document).ready(function() {
+
+          //alert("hola");
+          $("#producto").on('change', function() {
+            var s = $("#producto").val();
+            //alert("hola");
+            console.log(s);
+            var url = $(this).attr('action')
+            $.ajax({
+              url: "{{ route('ajax.product')}}",
+              type: 'POST',
+              data: $("#form1").serialize(),
+              success: function(res) {
+                $hola = res[0].precio;
+                console.log($hola)
+                document.getElementById("valorunid").value = $hola;
+              }
+            })
+          });
+
+        });
+      </script>
+
+      <script>
+          $(document).ready(function() {
+        $("#cantidad").on('change', function() {
+          var s = $("#cantidad").val();
+          //console.log(s);
+          let canti = document.getElementById("cantidad").value;
+          let precio = document.getElementById("valorunid").value;
+          document.getElementById("valortota").value = canti * precio;
+
+        });
         
-        //  document.getElementById('autoriza').innerText = ${};
+      });
+      </script>
+
+<script>
+        $(document).ready(function() {
+
+          //alert("hola");
+          $("#producto1").on('change', function() {
+            var s = $("#producto1").val();
+            //alert("hola");
+            console.log(s);
+            var url = $(this).attr('action')
+            $.ajax({
+              url: "{{ route('ajax.product')}}",
+              type: 'POST',
+              data: $("#form1").serialize(),
+              success: function(res) {
+                $hola = res[0].precio;
+                console.log($hola)
+                document.getElementById("valorunid").value = $hola;
+              }
+            })
+          });
+
+        });
+      </script>
+
+      <script>
+          $(document).ready(function() {
+        $("#cantidad").on('change', function() {
+          var s = $("#cantidad").val();
+          //console.log(s);
+          let canti = document.getElementById("cantidad").value;
+          let precio = document.getElementById("valorunid").value;
+          document.getElementById("valortota").value = canti * precio;
+
+        });
+        
+      });
       </script>

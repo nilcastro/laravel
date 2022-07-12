@@ -7,10 +7,10 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <!-- <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="material-icons">dashboard</i>
-          <p>{{ __('Inicio') }}</p>
+    <!-- <li class="nav-item{{ $activePage == 'solicitud' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('solicitud') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Mis Solicitudes  ') }}</p>
         </a>
       </li> -->
       <li class="nav-item{{ $activePage == 'solicitud' ? ' active' : '' }}">
@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'autorizacion' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('proveedores') }}">
+        <a class="nav-link" href="{{ route('autorizacion') }}">
           <i class="material-icons">library_books</i>
           <p>{{ __('Autorización ') }}</p>
         </a>

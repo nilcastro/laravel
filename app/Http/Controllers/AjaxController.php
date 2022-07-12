@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;  
 class AjaxController extends Controller
 {
     /**
@@ -27,51 +27,47 @@ class AjaxController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-       // $nombre = $request->nombreauto;
-        if($request->ajax()){
-            $animales = DB::select('CALL spsel_id()');
-            return response($animales);
-        // $nombre = \DB::table('users')
-        //             ->select('username')
-        //             ->where('name', '=',$nombre )
-        //             ->get();
-        //$nombres = $nombre->username;
-       
-        }
+        $nombre = $request->nombreauto;
+       // $nombre = DB::select('CALL spsel_id()',[$nombre]);
+        $nombre = \DB::table('users')
+                    ->select('username','nombre_jefe','apellido_jefe','programa')
+                    ->where('name', '=',$nombre )
+                    ->get();
+        return  response($nombre);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function registrar(Request $request)
     {
-        //
+        $nombre = $request->Nombreprove;
+    
+         $nombre = \DB::table('proveedores')
+                     ->select('correoProvee','nombreContac','telProvee','id')
+                     ->where('nombreProvee', '=',$nombre )
+                     ->get();
+
+         return  response($nombre);
+    }
+    public function producto(Request $request)
+    {
+        
+        $nombre = $request->producto;
+  
+        $nombre = \DB::table('productos')
+                    ->select('id_provee','precio')   
+                    ->where('id','=',$nombre )   
+                    ->get();   
+        return  response($nombre);  
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

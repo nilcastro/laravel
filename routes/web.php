@@ -54,6 +54,7 @@ Route::post('proveedores/create', [ProveedoresController::class, 'store'])->name
 Route::post('/roles/update,$role->id', [RolesController::class, 'update'])->name('/roles/update,$roles->id');
 
 Route::post('ajax/consulta', [AjaxController::class,'store'])->name('ajax.consulta');
-
+Route::post('ajax/register', [AjaxController::class,'registrar'])->name('ajax.register');
+Route::post('ajax/product', [AjaxController::class,'producto'])->name('ajax.product');
 //Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
 

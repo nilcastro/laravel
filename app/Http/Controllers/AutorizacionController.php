@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Solicitud;
 use Illuminate\Http\Request;
+
 
 class AutorizacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
-        
+        $solicitud = solicitud::paginate(10);
+        return view('autorizacion.index',compact('solicitud'));
     }
 
     /**
