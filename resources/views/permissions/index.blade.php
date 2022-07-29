@@ -37,14 +37,15 @@
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('permissions.show',$permission->id) }}" class="btn btn-info">
                                                             <i class="material-icons">person</i></a>
-                                                        <a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-warning">
+                                                        <a href="{{ route('permissions.edit',$permission->id ) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
                                                         <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('seguro?')">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                            <button class="btn btn-danger  btn-link btn-sm" onclick='swal({ title:"Eliminado", text: "registro no se vuelve a recuperar!", type: "success", buttonsStyling: false, confirmButtonClass: "btn btn-success"})'>  <i class="material-icons">close</i></button>
+                                                            <!-- <button class="btn btn-danger" type="submit" rel="tooltip">
                                                                 <i class="material-icons">close</i>
-                                                            </button>
+                                                            </button> -->
                                                         </form>
                                                     </td>
                                                 </tr>

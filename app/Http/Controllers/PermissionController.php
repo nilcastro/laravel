@@ -29,7 +29,14 @@ class PermissionController extends Controller
     
     public function store(Request $request)
     {   
-       
+        $campos=[
+            'name'=>'required|string|max:100',
+           ];
+           $mensaje=[
+               'required'=>'El campo :attribute es requerido',
+               'name.required'=>'El nombre del permiso es requerido', 
+           ];
+           $this->validate($request,$campos,$mensaje);        
      //dd($request);
         Permission::create($request->only('name'));
 
@@ -45,8 +52,10 @@ class PermissionController extends Controller
  
     public function edit(permission $permission)
     {
-        $permission = $permission->all();
-     //dd($permission);
+        
+
+        // $permission = $permission->all();
+        //dd($permission);
         return view('permissions.edit', compact('permission'));
     }
 
@@ -55,7 +64,7 @@ class PermissionController extends Controller
     {
         $permission->update($request->only('name'));
 
-        return redirect()->route('permission.index');
+        return redirect()->route('permissions.index');
     }
 
     

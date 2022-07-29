@@ -36,9 +36,9 @@
                                                   @endforelse
                                                </div>
                                                <div class="crad-footer">
-                                                   <div class="button-container">
+                                                   <!-- <div class="button-container">
                                                         <button class="btn btn-sm btn-primary ">Editar </button>
-                                                   </div>
+                                                   </div> -->
 
                                                </div>
                                             </div>

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'programa',
         'cargo',
         'jefe',
+        'email_jefe',
         'nombre_jefe',
         'apellido_jefe',
         'nombre_centroc'

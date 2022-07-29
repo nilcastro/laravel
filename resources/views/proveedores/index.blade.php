@@ -64,9 +64,9 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <thead class="">
+                                    <thead class=""> 
                                         <tr>
-                                            <th>Nombre proveedor</th>
+                                            <th>Nombre proveedor  </th>
                                             <th>Correo electronico</th>
                                             <th>Nombre de contacto </th>
                                             <th>Teléfono</th>

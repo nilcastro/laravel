@@ -45,50 +45,38 @@ class UserController extends Controller
         return redirect()->route('user.show', $user->id)->with('success', 'usuario registrado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(user $user)
     {
         $user->load('roles');
         return view('user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit(user $user)
     {
         $roles = role::all()->pluck('name','id');
         $user->load('roles');
-
+        //dd( $user);
         return view('user.edit', compact('user','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, user $user)
     {
-        //
+    
+      
+         $users = $request->only('role');
+      
+        $user ->update($users);
+         $role = $request->input('role',[]);
+         //dd($role);
+        $user->syncRoles($role);
+       
+        return redirect()->route('user.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy($id)
     {
         //

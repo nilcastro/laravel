@@ -24,10 +24,11 @@ return new class extends Migration
             $table->string('cargo')->nullable();
             $table->string('jefe')->nullable();
             $table->string('apellidos')->nullable();
+            $table->string('email_jefe')->nullable();
             $table->string('nombre_jefe')->nullable();
             $table->string('apellido_jefe')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

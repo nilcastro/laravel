@@ -26,26 +26,31 @@ class AjaxController extends Controller
    
     public function store(Request $request)
     {
-        //dd($request);
+    
         $nombre = $request->nombreauto;
-       // $nombre = DB::select('CALL spsel_id()',[$nombre]);
+    
         $nombre = \DB::table('users')
                     ->select('username','nombre_jefe','apellido_jefe','programa')
                     ->where('name', '=',$nombre )
                     ->get();
+        
         return  response($nombre);
     }
 
     public function registrar(Request $request)
     {
         $nombre = $request->Nombreprove;
-    
+ 
+        //dd($request);
          $nombre = \DB::table('proveedores')
-                     ->select('correoProvee','nombreContac','telProvee','id')
-                     ->where('nombreProvee', '=',$nombre )
+              
+                    ->select('correoProvee','nombreContac','telProvee','id','nombrecontactodos','telefonodos')
+                    ->where('id', '=',$nombre )
                      ->get();
-
-         return  response($nombre);
+                     
+     
+      $final  =  $nombre;
+         return  response($final);
     }
     public function producto(Request $request)
     {

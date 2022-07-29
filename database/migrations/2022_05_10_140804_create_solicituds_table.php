@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('centrocosto')->nullable();
             $table->string('correoautori')->nullable();
             $table->string('nombresolici')->nullable();
-            $table->string('recibe')->nullable();
+            $table->string('recoge')->nullable();
             $table->string('Nombreprove')->nullable();
             $table->string('Correoelectroni')->nullable();
             $table->string('Teléfono')->nullable();
@@ -42,8 +42,18 @@ return new class extends Migration
             $table->integer('cantidad')->nullable();
             $table->integer('valorunid')->nullable();
             $table->integer('valortota')->nullable();
+            $table->integer('persrecibe')->nullable();
+            $table->integer('telefrecibe')->nullable();
+            $table->string('fechasolicidos')->nullable();
+            $table->string('horados')->nullable();
+            $table->string('lugardos')->nullable();
+            $table->string('productodos')->nullable();
+            $table->integer('cantidaddos')->nullable();
+            $table->integer('valoruniddos')->nullable();
+            $table->integer('valortotados')->nullable();
+            $table->string('persrecibedos')->nullable();
             $table->string('estado')->nullable();
-          
+       
             $table->timestamps();
         });
     }

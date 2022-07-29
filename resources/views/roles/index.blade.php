@@ -50,9 +50,10 @@
                                                         <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('seguro deseas eliminar este registro?')">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                            <button class="btn btn-danger  btn-link btn-sm" onclick='swal({ title:"Eliminado", text: "registro no se vuelve a recuperar!", type: "success", buttonsStyling: false, confirmButtonClass: "btn btn-success"})'>  <i class="material-icons">close</i></button>
+                                                            <!-- <button class="btn btn-danger" type="submit" rel="tooltip">
                                                                 <i class="material-icons">close</i>
-                                                            </button>
+                                                            </button> -->
                                                         </form>
                                                     </td>
                                                 </tr>

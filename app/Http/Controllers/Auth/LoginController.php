@@ -46,6 +46,7 @@ class LoginController extends Controller
             ]
           );
           $autorizado_json = json_decode($response->body())->{"ESTADO"};
+          //dd($autorizado_json);
           if ($autorizado_json == $AUTHENTICATION_WS_OK) {
           // conusla jefe y dependencia 
           $proxyUsers = Http::withHeaders([
@@ -63,7 +64,7 @@ class LoginController extends Controller
             "Password" => "MFcbPby4x1LBFCvbxI2W"
           ])->get('https://ws-dev.upb.edu.co:8443/General/EzproxyUsers', [
              "pidm" => $proxyUserss[0]['ID_JEFE_INMEDIATO'],
-             "filter" => "pidm,tipo_usuario,activo,nombre,apellidos,email,programa", 
+              "filter" => "pidm,tipo_usuario,activo,nombre,apellidos,email,programa", 
           ]);
           $proxyUserjefE = $proxyUserjef->json();
           //dd($proxyUserjefE);
@@ -89,7 +90,7 @@ class LoginController extends Controller
                 'username' => $email_P
               ], [
                
-                'password' => bcrypt($password_P),
+                // 'password' => bcrypt($password_P),
                 'name' => $proxyUser[0]['NOMBRE'],
                 'apellidos' => $proxyUser[0]['APELLIDOS'],
                 'email' => $proxyUser[0]['EMAIL'],
@@ -97,6 +98,7 @@ class LoginController extends Controller
                 'nombre_centroc' => $proxyUserss[0]['DESC_CENTRO_COSTO'],
                 'cargo' => $proxyUserss[0]['DESC_CARGO'],
                 'jefe' => $proxyUserss[0]['ID_JEFE_INMEDIATO'],
+                'email_jefe' => $proxyUserjefE[0]['EMAIL'],
                 'nombre_jefe' => $proxyUserjefE[0]['NOMBRE'],
                 'apellido_jefe' => $proxyUserjefE[0]['APELLIDOS'],
               ]);

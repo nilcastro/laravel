@@ -36,11 +36,16 @@
             <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
           </div>
         </li> -->
+        <li>
+        {{ Auth::user()->name }} {{ Auth::user()->apellidos }}
+      
+        </li>
+        
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
             <p class="d-lg-none d-md-block">
-              {{ __('Account') }}
+         
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">

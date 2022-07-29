@@ -20,7 +20,7 @@ class Solicitud extends Model
     'centrocosto',
     'correoautori',
     'nombresolici',
-    'recibe',
+    'recoge',
     'Nombreprove',
     'Correoelectroni',
     'Teléfono',
@@ -32,11 +32,21 @@ class Solicitud extends Model
     'horauno',
     'lugaruno',
     'producto',
-   'nombreauto',
+    'nombreauto',
     'cantidad',
     'valorunid',
     'valortota',
-    'estado'
+    'persrecibe',
+    'telefrecibe',
+    'fechasolicidos',
+    'horados',
+    'lugardos',
+    'productodos',
+    'cantidaddos',
+    'valoruniddos',
+    'valortotados',
+    'persrecibedos',
+    'estado',
     ];
 
 }

@@ -23,19 +23,17 @@
                                             <thead class="text-primary">
                                                 <th>ID</th>
                                                 <th>Nombre</th>
-                                                <th>Guard</th>
-                                                <th>Fecha de creación</th>
+                                                <!-- <th>Fecha de creación</th> -->
                                                 <th>Rol</th>
-                                                <th>Permisos</th>
+                                                <!-- <th>Permisos</th> -->
                                                 <th class="text-rigth"></th>
                                             </thead>
                                             <tbody>
                                                 @foreach($users as $user)
                                                 <tr>
-                                                    <td>{{ $user->id}}</td>
-                                                    <td>{{ $user->name}}</td>
-                                                    <td>{{ $user->guard_name}}</td>
-                                                    <td>{{ $user->created_at}}</td>
+                                                    <td>{{ $user->username}}</td>
+                                                    <td>{{ $user->name}}{{ $user->apellidos}}</td>
+                                                    <!-- <td>{{ $user->created_at}}</td> -->
                                                     <td>
                                                         @forelse($user->roles as $role)
                                                             <span class="badge badge-info">{{  $role->name }}</span>
@@ -43,25 +41,18 @@
                                                             <span class="badge badge-info">sin rol</span>
                                                         @endforelse
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         @forelse($user->permissions as $permission)
                                                         <span class="badge badge-info">{{ $permission->name }}</span>
                                                         @empty
                                                         <span class="badge badge-danger">No tiene permisos</span>
                                                         @endforelse
-                                                    </td>
+                                                    </td> -->
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('user.show',$user->id) }}" class="btn btn-info">
                                                             <i class="material-icons">person</i></a>
                                                         <a href="{{ route('user.edit',$user->id) }}" class="btn btn-warning">
                                                             <i class="material-icons">edit</i></a>
-                                                        <form action="{{ route('roles.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('seguro deseas eliminar este registro?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </form>
                                                     </td>
                                                 </tr>
                                                 @endforeach

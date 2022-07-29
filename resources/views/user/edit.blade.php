@@ -12,13 +12,14 @@
                                 <h4 class="card-title">Editar usuarios</h4>
                                 <p class="card-category">Agregar nuevos permisos</p>
                             </div>
+                            @foreach($user as $use)
                             <div class="card-body ">
-                                @forelse($user as $use)
+                             
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label" for="input-name">Nombre</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control"  type="text" name="name" id="name" placeholder="Current Password" value="{{ $use->name}}" required="">
+                                            <input class="form-control"  type="text" name="name" id="name" placeholder="Current Password" value="{{ $user->name }} {{ $user->apellidos }}" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -26,28 +27,34 @@
                                     <label class="col-sm-2 col-form-label" for="input-password">ID</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control" name="username" id="username" type="text" placeholder="New Password" value="{{ $use->username}}" required="">
+                                            <input class="form-control" name="username" id="username" type="text" placeholder="New Password" value="{{ $user->username}}" required="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label" for="input-password-confirmation">Confirm New Password</label>
+                                    <label class="col-sm-2 col-form-label" for="input-password">Correo eletronico</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="Confirm New Password" value="" required="">
+                                            <input class="form-control" name="email" id="email" type="text" placeholder="New Password" value="{{ $user->email}}" required="">
                                         </div>
                                     </div>
-                                </div>  
-                           @empty
-
-                           @endforelse
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label" for="input-password">Correo eletronico</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group bmd-form-group">
+                                            <input class="form-control" name="cargo" id="cargo" type="text" placeholder="New Password" value="{{ $user->cargo}}" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                         @endforeach
                             <div class="row">
                             <label class="col-sm-2 col-form-label" for="input-password-confirmation">Permisos</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="profile">
-                                                .<table class="table ">
+                                                <table class="table ">
                                                     <tbody>
                                                         @foreach($roles as $id => $rol)
                                                         <tr>
@@ -55,7 +62,7 @@
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
                                                                         <input class="form-check-input" type="checkbox" name="role[]" 
-                                                                        value="{{ $id }}">
+                                                                        value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>
                                                                         </span>
@@ -76,7 +83,7 @@
                             </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
-                                <button type="submit" class="btn btn-primary">Change password</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>
                         </div>
                     </form>
