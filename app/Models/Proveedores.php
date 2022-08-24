@@ -12,6 +12,7 @@ class Proveedores extends Model
     public function productos(){
         return $this->hasMany(Productos::class,'id');
     }
+  
     public function getAllNames()
     {
        return $this->select('nombreProvee')->get();

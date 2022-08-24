@@ -23,7 +23,7 @@
       </li>
 
       <li class="nav-item{{ $activePage == 'autorizacion' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('autorizacion') }}">
+        <a class="nav-link" href="{{ route('autorizacion.index') }}">
           <i class="material-icons">
             done    
           </i>

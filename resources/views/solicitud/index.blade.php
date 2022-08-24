@@ -33,6 +33,7 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <tr>
+                                      <th>ID</th>
                                         <th>Fecha</th>
                                         <th>Autoriza</th>
                                         <th>Solicitante </th>
@@ -46,6 +47,7 @@
                                 <tbody>
                                     @foreach($solicitud as $solicitu)
                                     <tr>
+                                      <td >{{ $solicitu->id}}</td>
                                         <td>{{ $solicitu->dia}}</td>
                                         <td>{{ $solicitu->nombreauto}}</td>
                                         <td>{{ $solicitu->nombresolici}}</td>
@@ -53,12 +55,13 @@
                                         <td>{{ $solicitu->lugaruno}}</td>
                                         <td>{{ $solicitu->Nombreprove}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        <td><a href="#" class="btn btn-warning">Ver</a></td>
-                                    
+                                        <td>{{ $solicitu->estado}}</td>
+                                        <td><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">Revisar </a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                                                      
                         </div>
                     </div>
                 </div>

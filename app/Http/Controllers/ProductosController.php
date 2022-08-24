@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Productos;
 use App\Models\Proveedores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductosController extends Controller
 {
@@ -18,7 +19,7 @@ class ProductosController extends Controller
      
         $productos = Productos::all();
         $proveedores['proveedores'] = proveedores::all();
-
+        //dd($proveedores);
        // $productos = Productos::select('nombreprocee')->get->load('proveedores');
         //,'dd($proveedores);
         // $productos = \DB::table('proveedores')
@@ -40,9 +41,20 @@ class ProductosController extends Controller
     public function store(Request $request)
     {
         $productos = request()->except('_token');
-        //dd($productos);
+       // dd($productos);
+    //     $provee = $productos['id_provee'];
+    //     $producto = DB::table('proveedores')
+    //                     ->select('nombreProvee')
+    //                     ->where('id','=',$provee)
+    //                     ->get()->toArray();
         
+    //   $producto =  $producto[0];
+    //   $json = json_encode(json_encode($producto));
 
+    //                     dd($json);
+    //     //$producto->json($producto);
+    //     $productos['nombreProvee'] = $json;
+    //dd($productos);
         $productos = Productos::firstOrCreate($productos);
 
         return redirect('productos');

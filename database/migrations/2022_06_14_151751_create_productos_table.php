@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombreProduc')->nullable();
             $table->string('descrProduc')->nullable();
             $table->string('precio')->nullable();
+            $table->string('nombreProvee')->nullable();
             $table->foreignId('id_provee')
             ->nullable()
             ->constrained('proveedores')

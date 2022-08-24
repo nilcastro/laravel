@@ -38,10 +38,11 @@
 
                                 <div class="form-group mb-3 ">
                                     <label class="form-control" for="nombre">Nombre proveedor</label>
-                                    <select name="id_provee" id="id_provee" class="form-control">
+                                    <select name="nombreProvee" id="nombreProvee" class="form-control">
                                         <option value=""></option>
                                         @foreach($proveedores as $proveedor)
-                                        <option value="{{$proveedor->id}}">{{$proveedor->nombreProvee}}</option>
+                                        <option value="{{$proveedor->nombreProvee}} ">{{$proveedor->nombreProvee}}</option>
+                                       
                                         @endforeach
                                     </select>
                                 </div>
@@ -86,7 +87,7 @@
                                         <td>{{$producto->nombreProduc}}</td>
                                         <td>{{$producto->descrProduc}}</td>
                                         <td>{{$producto->precio}}</td>
-                                        <td>{{$producto->proveedores->nombreProvee}}</td>
+                                        <td>{{$producto->nombreProvee}}</td>
                                         <td> <button type="button" class="btn btn-primary btn-link btn-sm"  data-toggle="modal" data-target="#editarinfo{{$producto->id}}">
                                              <i class="material-icons">edit</i>
                                             </button>

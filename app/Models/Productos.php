@@ -12,11 +12,13 @@ class Productos extends Model
     public function proveedores(){
         return  $this->belongsTo(proveedores::class,'id_provee');
     }
+  
     protected $fillable = [
         'nombreProduc',
         'descrProduc',
         'precio',
-        'id_provee'
+        'id_provee',
+        'nombreProvee'
        
     ];
 }

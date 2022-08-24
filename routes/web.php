@@ -31,22 +31,26 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['Middleware' => 'auth'], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('solicitud', [SolicitudController::class, 'index'])->name('solicitud');
+ Route::get('solicitud', [SolicitudController::class, 'index'])->name('solicitud');
     Route::get('proveedores', [ProveedoresController::class, 'index'])->name('proveedores');
     Route::get('productos', [ProductosController::class, 'index'])->name('productos');
-    Route::get('autorizacion', [AutorizacionController::class, 'index'])->name('autorizacion');
+    // Route::get('autorizacion', [AutorizacionController::class, 'index'])->name('autorizacion');
     Route::get('especial', [EspecialesController::class, 'index'])->name('especial');
   
     Route::resource('permissions', PermissionController::class);
     Route::resource('producto', ProductosController::class);
+    // Route::resource('solicitud', SolicitudController::class);
+    Route::resource('autorizacion', AutorizacionController::class);
     Route::resource('proveedore', ProveedoresController::class);
     Route::resource('roles', RolesController::class);
     Route::resource('user', UserController::class);
     // Route::resource('especiales', EspecialesController::class);
 
 });
-Route::get('solicitud/create', [SolicitudController::class, 'create'])->name('solicitud/create')->middleware('auth');
-Route::post('solicitud', [SolicitudController::class, 'store'])->name('solicitud/create')->middleware('auth');
+// Route::resource('solicitud', SolicitudController::class);
+ Route::get('solicitud/create', [SolicitudController::class, 'create'])->name('solicitud/create')->middleware('auth');
+ Route::post('solicitud', [SolicitudController::class, 'store'])->name('solicitud/create')->middleware('auth');
+ Route::put('solicitud/.$solicitu->id./edit',[ SolicitudController::class,'edit'])->name('solicitud.edit')->middleware('auth');
 Route::post('productos/create', [ProductosController::class, 'store'])->name('productos/create');
 Route::post('/productos/update,$producto->id', [ProductosController::class, 'update'])->name('/productos/update,$producto->id');
 Route::post('/proveedores/update,$producto->id', [ProveedoresController::class, 'update'])->name('/proveedores/update,$producto->id');

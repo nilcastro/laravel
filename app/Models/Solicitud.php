@@ -19,6 +19,7 @@ class Solicitud extends Model
     'jefeautori',
     'centrocosto',
     'correoautori',
+    'username',
     'nombresolici',
     'recoge',
     'Nombreprove',
@@ -37,6 +38,7 @@ class Solicitud extends Model
     'valorunid',
     'valortota',
     'persrecibe',
+    'mas',
     'telefrecibe',
     'fechasolicidos',
     'horados',
@@ -46,7 +48,9 @@ class Solicitud extends Model
     'valoruniddos',
     'valortotados',
     'persrecibedos',
+    'correoautorizadores',
     'estado',
+    'jefe',
     ];
 
 }

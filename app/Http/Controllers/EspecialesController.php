@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proveedores;
+use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -16,28 +19,68 @@ class EspecialesController extends Controller
      */
     public function index()
     {
-        
-        $autorizas = User::all();
-        //dd($autoriza);
-        $proveedores =DB::table('proveedores')
-                        ->select('nombreProvee')
-                        ->get();
-          //dd($proveedores);
-        return view('especial/index',compact('autorizas','proveedores'));
-    }
+        $solicitud = solicitud::get();
+        //dd($solicitud);
 
+        $jefe = Auth::user()->jefe;
+        $user = Auth::user()->username;
+        $admin = Auth::user()->role;
+        $programa = Auth::user()->programa;
 
+            $jefes = Solicitud::where('jefe','=',$user )->exists();
+          
+            //dd($jefes);
+            if($jefes == true){
+            $solicitud = DB::table('solicituds')
+                            ->select('solicituds.*')
+                            ->where('jefe','=',$user)
+                            ->orderBy('id','DESC')
+                            ->paginate(10);
+                           // dd($solicituds);
+         
+                return view('solicitud.index')->with('solicitud',$solicitud);
+            
+            }elseif($jefes == false){ 
+            //dd($user);
+            $solicitud = DB::table('solicituds')
+                            ->select('solicituds.*')
+                            ->where('username', '=',$user )
+                            ->orwhere('autoriza', '=',$user )
+                            ->orderBy('id','DESC')
+                            ->paginate(10);
+            return view('especial.index')->with('solicitud',$solicitud);
+        }
+      }
     public function create()
     {
-        //
-    }
+        $autorizas = DB::table('users')
+            ->select('name', 'role')
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+            ->get();
+        // dd($autoriza);  
+
+
+        $proveedores = DB::table('proveedores')
+            ->get();
+           
+        $productos = \DB::table('productos')
+            // ->select('nombreProduc', 'precio', 'id','id_provee')
+            ->get();
+           // dd($productos);
+        // dd($productos);
+        //  $proxyUsers = Http::withHeaders([
+        //     "Username" => "upb_refrigerios",
+        //     "Password" => "MFcbPby4x1LBFCvbxI2W"
+        //   ])->get('https://ws-dev.upb.edu.co:8443/Empleados/Ubicaciones', [
+        //      "pidm" => $email_P,
+        //      "filter" => "desc_cargo,id_jefe_inmediato,desc_centro_costo,nombre_dependencia" 
+        //   ]);
+        //   $proxyUserss = $proxyUsers->json();
+        // $proveedores = Productos::all()->pluck('id_provee','nombreProduc');
+        // paa caragr por medio de la relacion los permisos 
+  
+        return view('solicitud/create', compact('autorizas', 'proveedores', 'productos'));
+    }
     public function store(Request $request)
     {
         //

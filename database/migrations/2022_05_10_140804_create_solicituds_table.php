@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('jefeautori')->nullable();
             $table->string('centrocosto')->nullable();
             $table->string('correoautori')->nullable();
+            $table->string('username')->nullable();
             $table->string('nombresolici')->nullable();
             $table->string('recoge')->nullable();
             $table->string('Nombreprove')->nullable();
@@ -43,6 +44,7 @@ return new class extends Migration
             $table->integer('valorunid')->nullable();
             $table->integer('valortota')->nullable();
             $table->integer('persrecibe')->nullable();
+            $table->string('mas')->nullable();
             $table->integer('telefrecibe')->nullable();
             $table->string('fechasolicidos')->nullable();
             $table->string('horados')->nullable();
@@ -52,8 +54,9 @@ return new class extends Migration
             $table->integer('valoruniddos')->nullable();
             $table->integer('valortotados')->nullable();
             $table->string('persrecibedos')->nullable();
+            $table->string('correoautorizadores')->nullable();
             $table->string('estado')->nullable();
-       
+            $table->string('jefe')->nullable();
             $table->timestamps();
         });
     }

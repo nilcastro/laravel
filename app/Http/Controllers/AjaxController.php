@@ -30,7 +30,7 @@ class AjaxController extends Controller
         $nombre = $request->nombreauto;
     
         $nombre = \DB::table('users')
-                    ->select('username','nombre_jefe','apellido_jefe','programa')
+                    ->select('username','nombre_jefe','apellido_jefe','programa','email')
                     ->where('name', '=',$nombre )
                     ->get();
         
@@ -42,26 +42,26 @@ class AjaxController extends Controller
         $nombre = $request->Nombreprove;
  
         //dd($request);
-         $nombre = \DB::table('proveedores')
-              
-                    ->select('correoProvee','nombreContac','telProvee','id','nombrecontactodos','telefonodos')
-                    ->where('id', '=',$nombre )
+         $nombre = DB::table('proveedores')
+                    ->join('productos','proveedores.id','=','productos.id_provee')
+                    ->select('proveedores.correoProvee','proveedores.nombreContac','proveedores.telProvee'//'proveedores.id'
+                    ,'proveedores.nombrecontactodos','proveedores.telefonodos','productos.nombreProduc','productos.id','productos.precio')
+                    ->where('proveedores.id', '=',$nombre )
                      ->get();
-                     
-     
-      $final  =  $nombre;
-         return  response($final);
+
+         return  response($nombre);
     }
     public function producto(Request $request)
     {
         
-        $nombre = $request->producto;
-  
-        $nombre = \DB::table('productos')
-                    ->select('id_provee','precio')   
-                    ->where('id','=',$nombre )   
-                    ->get();   
-        return  response($nombre);  
+        $nombre = $request->id;
+        
+            //dd($nombre);
+        $nombre = DB::table('productos')
+                    ->select('nombreProduc','precio')   
+                    ->where('id','=',$nombre   )   
+                    ->get(10);   
+        return  response()->json($nombre);  
     }
 
     public function edit($id)

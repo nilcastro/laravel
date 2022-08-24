@@ -27,6 +27,7 @@
                                 <tbody>
                                     @foreach($solicitud as $solicitu)
                                     <tr>
+                                    <td>{{ $solicitu->id}}</td>
                                         <td>{{ $solicitu->dia}}</td>
                                         <td>{{ $solicitu->nombreauto}}</td>
                                         <td>{{ $solicitu->nombresolici}}</td>
@@ -34,7 +35,7 @@
                                         <td>{{ $solicitu->lugaruno}}</td>
                                         <td>{{ $solicitu->Nombreprove}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        <td><a href="#" class="btn btn-warning">Autorizar</a></td>
+                                        <td><a href="{{ url('/autorizacion/'.$solicitu->id.'/edit') }}" class="btn btn-warning">Autorizar</a></td>
                                     
                                     </tr>
                                     @endforeach
