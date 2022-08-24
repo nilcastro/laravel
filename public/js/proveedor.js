@@ -101,27 +101,27 @@ $(document).ready(function() {
     })
   });
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-//alert("hola");
-$("#producto").on('change', function() {
-  let s = $("#producto").val();
-   let p = $("#Nombreprove").val()
-   let i = $("#id").val()
-  //alert("hola");
-  console.log(i);
-  var url = $(this).attr('action')
-  $.ajax({
-    url: "{{ route('ajax.product')}}",
-    type: 'POST',
-    data: $("#form1").serialize(),
-  }).done(function(res) {
-      console.log(res);
-      $("#valorunid").val(res);
+// //alert("hola");
+// $("#producto").on('change', function() {
+//   let s = $("#producto").val();
+//    let p = $("#Nombreprove").val()
+//    let i = $("#id").val()
+//   //alert("hola");
+//   console.log(i);
+//   var url = $(this).attr('action')
+//   $.ajax({
+//     url: "{{ route('ajax.product')}}",
+//     type: 'POST',
+//     data: $("#form1").serialize(),
+//   }).done(function(res) {
+//       console.log(res);
+//       $("#valorunid").val(res);
   
-  });               
-})
-});
+//   });               
+// })
+// });
 
 
 

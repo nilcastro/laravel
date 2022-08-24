@@ -52,13 +52,14 @@ class SolicitudController extends Controller
       }
     public function create()
     {
+        $con =  '["1"]';
         $autorizas = DB::table('users')
-            ->select('name', 'role')
-
+            ->select('name', 'role','nombre_centroc')
+            ->where('role','=',$con)
             ->get();
-        // dd($autoriza);  
-
-
+        //  dd($autorizas);  
+       
+       
         $proveedores = DB::table('proveedores')
             ->get();
            

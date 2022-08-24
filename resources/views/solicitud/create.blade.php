@@ -49,7 +49,12 @@
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Asistentes a la actividad:</strong>
-                    <input type="number" name="asistente" id="asistente" value="" class="form-control" placeholder="Indique la cantidad de personas.">
+                    <select name="asistente" id="asistente" class="form-control">
+                      <option value="">Selecciona un tipo de asistente</option>
+                      <option value="Personal Interno">Personal Interno</option>
+                      <option value="Personal Externo">Personal Externo</option>
+                      <option value="Personal Interno yExterno">Personal Interno y Externo</option>
+                    </select>
                   </div>
                 </div>
 
@@ -59,7 +64,7 @@
                     <input type="numbre" id="autoriza" name="autoriza" value="" readonly required class="form-control" placeholder="ID de quien autoriza">
                   </div>
                   <div class="col  mt-4">
-                    <strong for="dia" class="form-label">Nombre de quien autoriza:</strong>
+                    <strong for="dia" class="form-label">Nombre de persona autorizada ante el proveedor:</strong>
                     <select name="nombreauto" id="nombreauto" required class="form-control">
                       <option value="">--Indique el nombre de quien autoriza--</option>
                       @foreach($autorizas as $autoriza)
@@ -71,9 +76,14 @@
                     <input type="hidden" name="correoautorizadores" id="correoautorizadores" value="">
                   </div>
                   <div class="col mt-4">
+                    <strong for="dia" class="form-label">Nombre unidad que autoriza:</strong>
+                    <input type="text" name="unidadAutori" id="unidadAutori" readonly value="" class="form-control" placeholder="Indique la unidad que autoriza ">
+                  </div>
+                  <div class="col mt-4">
                     <strong for="dia" class="form-label">Nombre de jefe que autoriza:</strong>
                     <input type="text" name="jefeautori" id="jefeautori" readonly value="" class="form-control" placeholder="Indique el nombre del jefe autorizador ">
                   </div>
+                 
                   <div class="col mt-4">
                     <strong for="dia" class="form-label">Solicitud realizada por:</strong>
                     <input type="text" name="nombresolici" id="nombresolici" value="{{ Auth::user()->name }}{{ Auth::user()->apellidos }}" class="form-control" placeholder="Indique el nombre de la persona que solicita el servicio ">
@@ -187,9 +197,6 @@
                         <div class="col-md-2">
                           <strong class=" text-primary"  class="form-label">Valor unitario</strong>
                           <input type="number" name="valorunid" id="valorunid" value="" class="form-control">
-                          <!-- <select  name="valorunid" id="valorunid" class="form-control">
-                                  <option value="">Selecione</option>
-                          </select> -->
                         </div>
                         <div class="col-md-3">
                           <strong class=" text-primary" for="lugar" class="form-label">Valor total</strong>
@@ -199,8 +206,13 @@
                           <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
                           <input class="form-control" type="text" id="persrecibe" name="persrecibe" value="">
                         </div>
+                        <div class="col-md-8 mt-4">
+                          <strong class=" text-primary" for="recibe" class="form-label">Observaciónes del pedido </strong>
+                          <input class="form-control" type="textarea" id="observacion" name="observacion" value=""
+                          placeholder="Pequeña observación adicional sobre el pedido  ">
+                        </div>
                       </div>
-                      <hr>
+                     
                       <!-- .................................................................................................................. -->
                       <div class="container" id="encuestser" style="display:none ;">
                         <div class="row">
@@ -331,7 +343,6 @@
         });
 
         $(document).ready(function() {
-          // alert("hola");
           $("#nombreauto").on('change', function() {
             let si = $("#nombreauto").val();
             console.log(si);
@@ -342,10 +353,11 @@
               data: $("#form1").serialize(),
             }).done(function(res) {
               $jefe = res[0].nombre_jefe + res[0].apellido_jefe
-              // alert($jefe)
               document.getElementById("autoriza").value = res[0].username;
               document.getElementById("jefeautori").value = $jefe;
               document.getElementById("correoautorizadores").value = res[0].email;
+              document.getElementById("unidadAutori").value = res[0].nombre_centroc;
+           
             })
           });
 
@@ -353,8 +365,6 @@
 
 
         $(document).ready(function() {
-
-          //alert("hola");
           $("#Nombreprove").on('change', function() {
             let s = $("#Nombreprove").val();
             // console.log(s);
@@ -367,7 +377,7 @@
               pruductos = res[0].nombreProduc;
                 precios = res[0].precio;
                 console.log(res);
-                document.getElementById("id").value = res[0].id;
+                document.getElementById("id").value = res[1].id;
                 document.getElementById("Correoelectroni").value = res[0].correoProvee;
                 document.getElementById("Teléfono").value = res[0].telProvee;
                 document.getElementById("nombrecontactouno").value = res[0].nombreContac;
@@ -375,51 +385,37 @@
                 document.getElementById("nombrecontactodos").value = res[0].nombrecontactodos;
                 document.getElementById("telefonodos").value = res[0].telefonodos;
                 $("#producto").empty();
+              
                
                 for(let i=0; i<res.length; ++i){
                   let html_select ='<option value="">Seleccione producto</option';
-                  $("#producto").append('<option class="form-control" value="'+res[i].nombreProduc+'">'+res[i].nombreProduc+'</option>');
-                  // $("#valorunid").val(res[i].precio);
-                 
-                  // $("#producto").on('change', function() {
-                  //   let s = $("#producto").val();
-                  
-                  //   //alert("hola");
-                  //   console.log(s);
-                  
-                  //   $("#valorunid").empty();
-                  //       $("#valorunid").val(res[i].precio);       
-                  // })
-              
+                  $("#producto").append('<option class="form-control" value="'+res[i].id+'">'+res[i].nombreProduc+'</option>');
                 }
-              
               })
             })
+           
           });
-       
-      $(document).ready(function() {
-
-        //alert("hola");
-        $("#producto").on('change', function() {
-          let s = $("#producto").val();
-           let p = $("#Nombreprove").val()
-           let i = $("#id").val()
-          //alert("hola");
-          console.log(i);
-          var url = $(this).attr('action')
-          $.ajax({
-            url: "{{ route('ajax.product')}}",
-            type: 'POST',
-            data: $("#form1").serialize(),
-          }).done(function(res) {
-              console.log(res);
-              $("#valorunid").val(res);
+          $(document).ready(function() {
+          $("#producto").on('change', function() {
+            let s = $("#producto").val();
           
-          });               
-        })
-      });
-       
-
+             console.log(s);
+            var url = $(this).attr('action')
+              $.ajax({
+                url: "{{ route('ajax.product')}}",
+                type: 'POST',
+                data: $("#form1").serialize(),
+              }).done(function(res) {
+                
+                console.log(res);
+                 let obj = res;
+                  for(let i in obj){
+                    console.log(obj[i].precio);
+                    $("#valorunid").val(obj[i].precio);
+                  }
+              });               
+            })
+          });
 
         $(document).ready(function() {
           $("#cantidad").on('change', function() {
@@ -446,4 +442,38 @@
           });
 
         });
+
+        $(document).ready(function() {
+          $("#fechafi").on('change ', function() {
+            let fecha1 = $('#fechain').val();
+            let fecha2 = $('#fechafi').val();
+
+
+            if (createDate(fecha1).getTime() != createDate(fecha2).getTime()) {
+              console.log('No son iguales');
+            } else {
+              console.log('Son iguales');
+
+            }
+
+            function createDate(dateString) {
+              /*
+                Dividimos la cadena por el separador
+                */
+              var dateParts = dateString.split("-");
+              /* 
+                En Javascript el mes es 0-based, 
+                por eso restamos 1 a la parte del mes
+                mediante dataParts[1] - 1
+                Y usamos Date.UTC para que ignore la zona horaria
+                esto puedes quitarlo si no interesa
+                */
+              return new Date(Date.UTC(+dateParts[2], dateParts[1] - 1, +dateParts[0]));
+            }
+                      
+            })
+            
+          });
+
+      
       </script>

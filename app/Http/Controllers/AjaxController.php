@@ -30,7 +30,7 @@ class AjaxController extends Controller
         $nombre = $request->nombreauto;
     
         $nombre = \DB::table('users')
-                    ->select('username','nombre_jefe','apellido_jefe','programa','email')
+                    ->select('username','nombre_jefe','apellido_jefe','programa','email','nombre_centroc')
                     ->where('name', '=',$nombre )
                     ->get();
         
@@ -44,8 +44,8 @@ class AjaxController extends Controller
         //dd($request);
          $nombre = DB::table('proveedores')
                     ->join('productos','proveedores.id','=','productos.id_provee')
-                    ->select('proveedores.correoProvee','proveedores.nombreContac','proveedores.telProvee'//'proveedores.id'
-                    ,'proveedores.nombrecontactodos','proveedores.telefonodos','productos.nombreProduc','productos.id','productos.precio')
+                    ->select('proveedores.correoProvee','proveedores.nombreContac','proveedores.telProvee','productos.id'
+                    ,'proveedores.nombrecontactodos','proveedores.telefonodos','productos.nombreProduc','productos.precio')
                     ->where('proveedores.id', '=',$nombre )
                      ->get();
 
@@ -54,14 +54,14 @@ class AjaxController extends Controller
     public function producto(Request $request)
     {
         
-        $nombre = $request->id;
+        $nombre = $request->producto;
         
             //dd($nombre);
         $nombre = DB::table('productos')
-                    ->select('nombreProduc','precio')   
+                    ->select('nombreProduc','precio','id_provee')   
                     ->where('id','=',$nombre   )   
-                    ->get(10);   
-        return  response()->json($nombre);  
+                    ->get();   
+        return  response($nombre);  
     }
 
     public function edit($id)
