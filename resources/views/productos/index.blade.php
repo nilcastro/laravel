@@ -12,7 +12,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel">Formulario nuevo proveedor</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Formulario nuevo producto.</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span arial-hidden="true">&times;</span>
                         </button>
@@ -33,15 +33,16 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form" for="exampleCheck1">Precio por unidad </label>
-                                    <input type="text" class="form-control" name="precio" id="precio">
+                                    <input type="number" class="form-control" name="precio" id="precio">
                                 </div>
 
                                 <div class="form-group mb-3 ">
                                     <label class="form-control" for="nombre">Nombre proveedor</label>
                                     <select name="nombreProvee" id="nombreProvee" class="form-control">
-                                        <option value=""></option>
+                                    <option value="">Selecciona proveedor</option>
                                         @foreach($proveedores as $proveedor)
-                                        <option value="{{$proveedor->nombreProvee}} ">{{$proveedor->nombreProvee}}</option>
+                                      
+                                        <option value="{{$proveedor->nombreProvee}}">{{$proveedor->nombreProvee}}</option>
                                        
                                         @endforeach
                                     </select>

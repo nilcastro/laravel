@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('jefeautori')->nullable();
             $table->string('centrocosto')->nullable();
             $table->string('correoautori')->nullable();
+            $table->string('correoautori')->nullable();
+            $table->string('unidadAutori');
             $table->string('username')->nullable();
             $table->string('nombresolici')->nullable();
             $table->string('recoge')->nullable();
@@ -46,6 +48,7 @@ return new class extends Migration
             $table->integer('persrecibe')->nullable();
             $table->string('mas')->nullable();
             $table->integer('telefrecibe')->nullable();
+            $table->integer('observacion')->nullable();
             $table->string('fechasolicidos')->nullable();
             $table->string('horados')->nullable();
             $table->string('lugardos')->nullable();

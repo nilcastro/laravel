@@ -33,7 +33,6 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <tr>
-                                      <th>ID</th>
                                         <th>Fecha</th>
                                         <th>Autoriza</th>
                                         <th>Solicitante </th>
@@ -46,8 +45,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach($solicitud as $solicitu)
+                                    @if(Auth::user()->username == $solicitu->autoriza && $solicitu->estado ==  "Aceptada")
                                     <tr>
-                                      <td >{{ $solicitu->id}}</td>
                                         <td>{{ $solicitu->dia}}</td>
                                         <td>{{ $solicitu->nombreauto}}</td>
                                         <td>{{ $solicitu->nombresolici}}</td>
@@ -58,10 +57,35 @@
                                         <td>{{ $solicitu->estado}}</td>
                                         <td><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">Revisar </a></td>
                                     </tr>
+                                    @elseif(Auth::user()->username == $solicitu->jefe )
+                                    <tr>
+                                        <td>{{ $solicitu->dia}}</td>
+                                        <td>{{ $solicitu->nombreauto}}</td>
+                                        <td>{{ $solicitu->nombresolici}}</td>
+                                        <td>{{ $solicitu->duracion}}</td>
+                                        <td>{{ $solicitu->lugaruno}}</td>
+                                        <td>{{ $solicitu->Nombreprove}}</td>
+                                        <td class="text-primary">{{ $solicitu->fechain}}</td>
+                                        <td>{{ $solicitu->estado}}</td>
+                                        <td><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">Revisar </a></td>
+                                    </tr>
+                                    
+                                    @elseif(Auth::user()->username == $solicitu->username )
+                                    <tr>
+                                        <td>{{ $solicitu->dia}}</td>
+                                        <td>{{ $solicitu->nombreauto}}</td>
+                                        <td>{{ $solicitu->nombresolici}}</td>
+                                        <td>{{ $solicitu->duracion}}</td>
+                                        <td>{{ $solicitu->lugaruno}}</td>
+                                        <td>{{ $solicitu->Nombreprove}}</td>
+                                        <td class="text-primary">{{ $solicitu->fechain}}</td>
+                                        <td>{{ $solicitu->estado}}</td>
+                                        <td><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">Revisar </a></td>
+                                    </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
-                            </table>
-                                                      
+                            </table>                          
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
               <div class="row">
                 <div class="col-md-6 ">
                   <div class="col  mt-4">
-                    <strong for="dia" class="form-label">Fecha de la solicitud:</strong>
+                    <strong for="dia" class="form-label">Fecha de la solicitudes:</strong>
                     <input type="date" name="dia" readonly value="{{ isset($solicitud->dia)?$solicitud->dia:old('dia') }}" class="form-control" placeholder="Fecha del viaje">
                   </div>
                   <div class="col  mt-4">

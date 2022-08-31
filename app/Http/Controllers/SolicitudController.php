@@ -25,8 +25,8 @@ class SolicitudController extends Controller
         $user = Auth::user()->username;
         $admin = Auth::user()->role;
         $programa = Auth::user()->programa;
-
-            $jefes = Solicitud::where('jefe','=',$user )->exists();
+      
+        $jefes = Solicitud::where('jefe','=',$user )->exists();
           
             //dd($jefes);
             if($jefes == true){
@@ -35,9 +35,10 @@ class SolicitudController extends Controller
                             ->where('jefe','=',$user)
                             ->orderBy('id','DESC')
                             ->paginate(10);
-                           // dd($solicituds);
-         
-                return view('solicitud.index')->with('solicitud',$solicitud);
+                            //dd($solicitud);
+            
+            
+            return view('solicitud.index')->with('solicitud',$solicitud);
             
             }elseif($jefes == false){ 
             //dd($user);
@@ -47,19 +48,19 @@ class SolicitudController extends Controller
                             ->orwhere('autoriza', '=',$user )
                             ->orderBy('id','DESC')
                             ->paginate(10);
-            return view('solicitud.index')->with('solicitud',$solicitud);
+                           
+
+            return view('solicitud.index')->with('solicitud',$solicitud,'estado');
         }
       }
     public function create()
     {
         $con =  '["1"]';
         $autorizas = DB::table('users')
-            ->select('name', 'role','nombre_centroc')
+            ->select('name','apellidos','role','nombre_centroc')
             ->where('role','=',$con)
             ->get();
-        //  dd($autorizas);  
-       
-       
+        
         $proveedores = DB::table('proveedores')
             ->get();
            
@@ -86,14 +87,21 @@ class SolicitudController extends Controller
     {
 
         $datosSolicitud = request()->except('_token', 'mas');
+       
         $jefe = $datosSolicitud['email_jefe'];
         $provee = $datosSolicitud['Nombreprove'];
-       
-        $solicitud = Proveedores::where('id','=',$provee)->get();
+        $product = $datosSolicitud['producto'];
 
-     
-     
+        $solicitud = Proveedores::where('id','=',$provee)->get();
+        $datosSolicitud['Nombreprove']= $solicitud[0]->nombreProvee; 
+
+        $solicitud = Productos::where('id','=',$product)->get();
+        $datosSolicitud['producto']= $solicitud[0]->nombreProduc; 
+       
+        //creación de la solicitud en la table solicitud  
         $solicitud = solicitud::firstOrCreate($datosSolicitud);
+       
+        // envio de correo electronico al jefe 
         $correo = new AsignacionMailable($solicitud);
 
         Mail::to($jefe)->send($correo);

@@ -41,20 +41,16 @@ class ProductosController extends Controller
     public function store(Request $request)
     {
         $productos = request()->except('_token');
-       // dd($productos);
-    //     $provee = $productos['id_provee'];
-    //     $producto = DB::table('proveedores')
-    //                     ->select('nombreProvee')
-    //                     ->where('id','=',$provee)
-    //                     ->get()->toArray();
-        
-    //   $producto =  $producto[0];
-    //   $json = json_encode(json_encode($producto));
-
-    //                     dd($json);
-    //     //$producto->json($producto);
-    //     $productos['nombreProvee'] = $json;
-    //dd($productos);
+        // dd($productos);
+        $provee = $productos['nombreProvee'];
+        $producto = DB::table('proveedores')
+                        ->select('nombreProvee','id')
+                        ->where('nombreProvee','=',$provee)
+                        ->get();
+                    
+      $productos['id_provee'] =  $producto[0]->id;
+  
+     //dd($productos);
         $productos = Productos::firstOrCreate($productos);
 
         return redirect('productos');
@@ -76,7 +72,7 @@ class ProductosController extends Controller
     public function update(Request $request, productos $productos)
     {
         $productos = request()->except('_token');
-        //dd($productos);
+        // dd($productos);
         $id = $productos['id'];
         $productos = Productos::findOrFail($id);
         $productos->nombreProduc = $request->nombreProduc;

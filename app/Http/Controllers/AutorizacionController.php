@@ -57,18 +57,27 @@ class AutorizacionController extends Controller
     {
         $aceptada=  "Aceptada";
         $rechazado = "Rechazada";
-        $productos =  request()->except(['_token','_method']);
-        $producto = $productos['estado'];
-        $autorizador = $productos['correoautori'];
-        $id = $productos['id'];
-        //dd($productos);
+        $solicitud =  request()->except(['_token','_method']);
+       // dd($solicitud);
+        $producto = $solicitud['estado'];
+        $autorizador = $solicitud['correoautorizadores'];
+        $id = $solicitud['id'];
+        
 
-        if($producto == $aceptada)
-            $solicitud = Solicitud::where('id','=',$id)->update($productos);
+        if($producto == $aceptada){
+
+            $solicitud = Solicitud::where('id','=',$id)->update($solicitud);
+            
             $correo = new AutorizadaMailable($solicitud);
             Mail::to($autorizador)->send($correo);
 
-        return redirect('autorizacion');
+            
+            $solicitud = solicitud::get();
+            $solicitud['estado']= "Envio proveedor";
+            
+            return view('autorizacion.autorizada')->with('solicitud',$solicitud);
+        }
+          
         }
 
     
@@ -79,27 +88,20 @@ class AutorizacionController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $datosSolicitud = $id;
-        //dd($datosSolicitud);
+
         $autorizas = DB::table('users')
             ->select('name', 'role','username','email','programa')
              ->where('role','=','["1"]')
             ->get();
-         //dd($autorizas);  
-
-
+       
         $proveedores = DB::table('proveedores')
             ->select('nombreProvee', 'id')
             ->get();
-              //dd($proveedores);  
+   
         $productos = \DB::table('productos')
             ->select('nombreProduc', 'precio', 'id','id_provee')
             ->get();
@@ -113,29 +115,17 @@ class AutorizacionController extends Controller
         //   ]);
         //   $proxyUserss = $proxyUsers->json();
         $solicitud = Solicitud::findOrfail($id);
-  //dd($solicitud);
-
-        return view('solicitud.edit', compact('solicitud', 'autorizas', 'proveedores','productos'));
+  
+        return view('autorizacion.edit', compact('solicitud', 'autorizas', 'proveedores','productos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function destroy($id)
     {
         //

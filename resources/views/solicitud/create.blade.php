@@ -19,37 +19,39 @@
               </ul>
             </div>
             @endif
-            <div class="card card-primary">
+            <div class="card card-primary" style="text-transform:capitalize;">
               <div class="row">
                 <div class="col-md-6 ">
                   <div class="col  mt-4">
-                    <strong for="dia" class="form-label">Fecha de la solicitud:</strong>
+                    <strong for="dia" class=" text-primary">Fecha de la solicitud:</strong>
                     <input type="date" name="dia" readonly value="<?php echo date("Y-m-d") ?>" class="form-control" placeholder="Fecha del viaje">
                   </div>
-                  <div class="col  mt-4">
-                    <strong for="dia" class="form-label">Breve descripción del evento o
+                  <div class="col  mt-4" style="text-transform:capitalize;">
+                    <strong for="dia" class=" text-primary">Breve descripción del evento o
                       actividad:</strong>
                     <input type="text" name="description" id="description" value="" class="form-control" placeholder="Indique la descripción del evento">
                   </div>
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Duración de la actividad(Horas):</strong>
-                    <input type="number" name="duracion" id="duracion" value="" class="form-control" placeholder="Indique el número de horas para realizar del evento ">
+                    <strong for="dia" class=" text-primary">Duración de la actividad(Horas):</strong>
+                    <input type="number" name="duracion" id="duracion"required  value="" class="form-control" placeholder="Indique el número de horas para realizar del evento ">
                   </div>
+                  <div class="row ml-2 mt-4">
+                      <div class="col-md-6">
+                        <strong for="fechain" class=" text-primary">Fecha inicio de la activiad:</strong>
+                        <input type="date" name="fechain" id="fechain"required  value="" min=<?php $hoy = date("Y-m-d");
+                            echo $hoy; ?> max="15/09/2030"  class="form-control" placeholder="Indique las horas de duración del evento ">
+                      </div>
 
-                  <div class="col mt-4">
-                    <strong for="fechain" class="form-label">Fecha inicio de la activiad:</strong>
-                    <input type="date" name="fechain" id="fechain" value="" min=<?php $hoy = date("Y-m-d");
-                                                                                echo $hoy; ?> max="15/09/2030"  class="form-control" placeholder="Indique las horas de duración del evento ">
+                      <div class="col-md-6">
+                        <strong for="dia" class=" text-primary">Fecha fin de la actividad:</strong>
+                        <input type="date" name="fechafi" id="fechafi"required  value="" min=<?php $hoy = date("Y-m-d");
+                                                                                            echo $hoy; ?> max="2030-09-15" class="form-control" placeholder="Indique las horas de duración del evento ">
+                      </div>
                   </div>
-
+                 
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Fecha fin de la actividad:</strong>
-                    <input type="date" name="fechafi" id="fechafi" value="" min=<?php $hoy = date("Y-m-d");
-                                                                                        echo $hoy; ?> max="2030-09-15" class="form-control" placeholder="Indique las horas de duración del evento ">
-                  </div>
-                  <div class="col mt-4">
-                    <strong for="dia" class="form-label">Asistentes a la actividad:</strong>
-                    <select name="asistente" id="asistente" class="form-control">
+                    <strong for="dia" class=" text-primary">Asistentes a la actividad:</strong>
+                    <select name="asistente" id="asistente" required  class="form-control">
                       <option value="">Selecciona un tipo de asistente</option>
                       <option value="Personal Interno">Personal Interno</option>
                       <option value="Personal Externo">Personal Externo</option>
@@ -60,48 +62,48 @@
 
                 <div class="col-md-6">
                   <div class="col  mt-4">
-                    <strong for="dia" class="form-label">ID quien autoriza:</strong>
+                    <strong for="dia" class=" text-primary">ID de persona que autoriza:</strong>
                     <input type="numbre" id="autoriza" name="autoriza" value="" readonly required class="form-control" placeholder="ID de quien autoriza">
                   </div>
                   <div class="col  mt-4">
-                    <strong for="dia" class="form-label">Nombre de persona autorizada ante el proveedor:</strong>
+                    <strong for="dia" class=" text-primary">Nombre de persona autorizada ante el proveedor:</strong>
                     <select name="nombreauto" id="nombreauto" required class="form-control">
                       <option value="">--Indique el nombre de quien autoriza--</option>
                       @foreach($autorizas as $autoriza)
 
-                      <option value="{{$autoriza->name}}">{{$autoriza->name}}</option><br>
+                      <option value="{{$autoriza->name}}">{{ $autoriza->name  }} {{ $autoriza->apellidos }}</option><br>
 
                       @endforeach
                     </select>
                     <input type="hidden" name="correoautorizadores" id="correoautorizadores" value="">
                   </div>
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Nombre unidad que autoriza:</strong>
+                    <strong for="dia" class=" text-primary">Nombre unidad que autoriza:</strong>
                     <input type="text" name="unidadAutori" id="unidadAutori" readonly value="" class="form-control" placeholder="Indique la unidad que autoriza ">
                   </div>
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Nombre de jefe que autoriza:</strong>
+                    <strong for="dia" class=" text-primary">Nombre de jefe que autoriza:</strong>
                     <input type="text" name="jefeautori" id="jefeautori" readonly value="" class="form-control" placeholder="Indique el nombre del jefe autorizador ">
                   </div>
                  
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Solicitud realizada por:</strong>
+                    <strong for="dia" class=" text-primary">Solicitud realizada por:</strong>
                     <input type="text" name="nombresolici" id="nombresolici" value="{{ Auth::user()->name }}{{ Auth::user()->apellidos }}" class="form-control" placeholder="Indique el nombre de la persona que solicita el servicio ">
                     <input type="hidden" name="username" id="username" value="{{  Auth::user()->username}}">
                   </div>
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Centro de costos:</strong>
+                    <strong for="dia" class=" text-primary">Centro de costos:</strong>
                     <input type="text" name="centrocosto" id="centrocosto" value="{{ Auth::user()->programa }}"  class="form-control" placeholder="Indique el centro de costos ">
                   </div>
                   <div class="col mt-4">
-                    <strong for="dia" class="form-label">Correo electronico:</strong>
+                    <strong for="dia" class=" text-primary">Correo electronico:</strong>
                     <input type="text" name="correoautori" id="correoautori" value="{{ Auth::user()->email }}" class="form-control" placeholder="Indique el correo electronico ">
                   </div>
-                  <div class="col mt-4">
-                    <strong for="dia" class="form-label">Persona que recibe:</strong>
-                    <input type="text" name="recoge" id="recoge" value="" class="form-control" placeholder="Indique el nombre de la persona que recibe">
+                  <div class="col mt-4" style="text-transform:capitalize;" >
+                    <strong for="dia" class=" text-primary">Persona que recibe:</strong>
+                    <input type="text" name="recoge" id="recoge" value=""  onkeypress="mayus(this);" class="form-control" placeholder="Indique el nombre de la persona que recibe">
 
-                    <strong for="dia" class="form-label">Telefono de persona que recibe:</strong>
+                    <strong for="dia" class=" text-primary">Teléfono de persona que recibe:</strong>
                     <input type="text" name="telefrecibe" id="telefrecibe" value="" class="form-control" placeholder="Indique el número de telefono de la persona que recibe">
                   </div>
                 </div>
@@ -114,10 +116,9 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="col">
-                      <strong for="nombre" class="form-label">Nombre del concesionario o
-                        proveedor:</strong>
+                      <strong for="nombre" class=" text-primary">Nombre del concesionario o proveedor:</strong>
 
-                      <select class="form-control" name="Nombreprove" id="Nombreprove">
+                      <select class="form-control" required name="Nombreprove" id="Nombreprove">
                         <option value="">--Selecciona un proveedor</option>
                         @foreach($proveedores as $proveedore)
                         <option class="selectpicker" value="{{ $proveedore->id }}">
@@ -128,31 +129,31 @@
 
                     </div><br>
                     <div class="col">
-                      <strong for="correo" class="form-label">Correo institucional:</strong>
+                      <strong for="correo" class=" text-primary">Correo institucional:</strong>
                       <input type="email" name="Correoelectroni" value="" class="form-control" id="Correoelectroni" placeholder="Digite su correo instritucional">
                     </div>
                     <div class="col">
-                      <strong for="correo" class="form-label">Teléfono:</strong>
+                      <strong for="correo" class=" text-primary">Teléfono:</strong>
                       <input type="text" name="Teléfono" value="" class="form-control" id="Teléfono" placeholder="Digite su teléfono">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="col">
-                      <strong for="nombre" class="form-label">Nombre de contacto 1:</strong>
+                      <strong for="nombre" class=" text-primary">Nombre de contacto 1:</strong>
                       <input type="text" name="nombrecontactouno" id="nombrecontactouno" value="" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
                     </div><br>
                     <div class="col">
-                      <strong for="Cargo" class="form-label">Teléfono de contacto 1:</strong>
+                      <strong for="Cargo" class=" text-primary">Teléfono de contacto 1:</strong>
                       <input type="text" name="telefonouno" value="" id="telefonouno" class="form-control" placeholder="Digite su cargo" aria-label="Cargo">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="col">
-                      <strong for="nombre" class="form-label">Nombre de contacto 2:</strong>
+                      <strong for="nombre" class=" text-primary">Nombre de contacto 2:</strong>
                       <input type="text" name="nombrecontactodos" id="nombrecontactodos" class="form-control" placeholder="Ingrese el nombre de contacto" aria-label="Nombre completo">
                     </div><br>
                     <div class="col">
-                      <strong for="Cargo" class="form-label">Teléfono de contacto 2:</strong>
+                      <strong for="Cargo" class=" text-primary">Teléfono de contacto 2:</strong>
                       <input type="text" name="telefonodos" id="telefonodos" class="form-control" placeholder="Digite su cargo">
                     </div>
                     <p type="" name="id" id="id" value=""></p>
@@ -169,17 +170,17 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-2">
-                          <strong class=" text-primary" for="fecha" class="form-label">Fecha</strong>
-                          <input type="date" name="fechasoliciuno" id="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
+                          <strong class=" text-primary" for="fecha" class="form-label">Fecha de entrega</strong>
+                          <input type="date" name="fechasoliciuno" required id="fechasoliciuno" value="" class="form-control" min=<?php $hoy = date("Y-m-d");
                                                                                                                           echo $hoy; ?> max="2030-09-15" class="form-control" aria-label="Cargo">
                         </div>
                         <div class="col-md-2">
                           <strong class=" text-primary" for="hora" class="form-label">Hora</strong>
-                          <input type="time" name="horauno" id="horauno" value="" class="form-control" aria-label="Cargo">
+                          <input type="time" name="horauno" id="horauno" required value="" class="form-control" aria-label="Cargo">
                         </div>
                         <div class="col-md-3">
                           <strong class=" text-primary" for="lugar" class="form-label">Lugar</strong>
-                          <input type="text" name="lugaruno" id="lugaruno" value="" class="form-control">
+                          <input type="text" name="lugaruno" id="lugaruno" required value="" class="form-control">
                         </div>
                         <div class="col-md-4">
                           <strong class=" text-primary"  class="form-label">Producto a entregar</strong>
@@ -192,7 +193,7 @@
                       <div class="row">
                         <div class="col-md-2">
                           <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
-                          <input type="number" name="cantidad" id="cantidad" value="" class="form-control">
+                          <input type="number" name="cantidad" id="cantidad" required value="" class="form-control">
                         </div>
                         <div class="col-md-2">
                           <strong class=" text-primary"  class="form-label">Valor unitario</strong>
@@ -305,7 +306,9 @@
 
       <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
       </script>
+      <script src="{{ asset('js/main/eventos.js') }}"></script>
       <script>
+     
         $(document).ready(function() {
 
           // alert("hola");
@@ -385,11 +388,12 @@
                 document.getElementById("nombrecontactodos").value = res[0].nombrecontactodos;
                 document.getElementById("telefonodos").value = res[0].telefonodos;
                 $("#producto").empty();
-              
-               
+                $("#valorunid").empty();
+                $("#producto").append('<option class="form-control" value=""> Selecciona un producto</option>');
                 for(let i=0; i<res.length; ++i){
                   let html_select ='<option value="">Seleccione producto</option';
-                  $("#producto").append('<option class="form-control" value="'+res[i].id+'">'+res[i].nombreProduc+'</option>');
+                  $("#producto").append(
+                    '<option class="form-control" value="'+res[i].id+'">'+res[i].nombreProduc+'</option>');
                 }
               })
             })
@@ -407,12 +411,10 @@
                 data: $("#form1").serialize(),
               }).done(function(res) {
                 
-                console.log(res);
+                console.log("Producto DB", res);
                  let obj = res;
-                  for(let i in obj){
-                    console.log(obj[i].precio);
-                    $("#valorunid").val(obj[i].precio);
-                  }
+                 $("#valorunid").val(res[0].precio);
+                 
               });               
             })
           });
@@ -443,37 +445,7 @@
 
         });
 
-        $(document).ready(function() {
-          $("#fechafi").on('change ', function() {
-            let fecha1 = $('#fechain').val();
-            let fecha2 = $('#fechafi').val();
 
-
-            if (createDate(fecha1).getTime() != createDate(fecha2).getTime()) {
-              console.log('No son iguales');
-            } else {
-              console.log('Son iguales');
-
-            }
-
-            function createDate(dateString) {
-              /*
-                Dividimos la cadena por el separador
-                */
-              var dateParts = dateString.split("-");
-              /* 
-                En Javascript el mes es 0-based, 
-                por eso restamos 1 a la parte del mes
-                mediante dataParts[1] - 1
-                Y usamos Date.UTC para que ignore la zona horaria
-                esto puedes quitarlo si no interesa
-                */
-              return new Date(Date.UTC(+dateParts[2], dateParts[1] - 1, +dateParts[0]));
-            }
-                      
-            })
-            
-          });
 
       
       </script>
