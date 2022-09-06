@@ -78,7 +78,7 @@
                       <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
                         Get the pro version
                       </a>
-                  </li> 
+                  </li>
               <li class="button-container">
                 <a href="https://material-dashboard-laravel.creative-tim.com/docs/getting-started/laravel-setup.html" target="_blank" class="btn btn-default btn-block">
                   View Documentation
@@ -137,7 +137,7 @@
         <!-- Library for adding dinamically elements -->
         <script src="{{ asset('js/plugins/arrive.min.js') }}"></script>
         <!--  Google Maps Plugin    -->
-    
+
         <!-- Chartist JS -->
         <script src="{{ asset('js/plugins/chartist.min.js') }}"></script>
         <!--  Notifications Plugin    -->
@@ -145,8 +145,9 @@
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('js/material-dashboard.js?v=2.1.1') }}" type="text/javascript"></script>
         <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  
+
         <script src="{{ asset('js/settings.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
         @stack('js')
     </body>
 </html>

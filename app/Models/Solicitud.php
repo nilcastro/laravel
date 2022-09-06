@@ -9,7 +9,7 @@ class Solicitud extends Model
 {
     use HasFactory;
     protected $fillable = [
-    'dia', 
+    'dia',
     'description',
     'duracion',
     'fechain',
@@ -36,7 +36,8 @@ class Solicitud extends Model
     'cantidad',
     'valorunid',
     'valortota',
-    'estado'
+    'estado',
+    'recibe'
     ];
 
 }

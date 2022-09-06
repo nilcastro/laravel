@@ -36,7 +36,7 @@ Route::group(['Middleware' => 'auth'], function(){
     Route::get('productos', [ProductosController::class, 'index'])->name('productos');
     Route::get('autorizacion', [AutorizacionController::class, 'index'])->name('autorizacion');
     Route::get('especial', [EspecialesController::class, 'index'])->name('especial');
-  
+
     Route::resource('permissions', PermissionController::class);
     Route::resource('producto', ProductosController::class);
     Route::resource('proveedore', ProveedoresController::class);
@@ -56,5 +56,6 @@ Route::post('/roles/update,$role->id', [RolesController::class, 'update'])->name
 Route::post('ajax/consulta', [AjaxController::class,'store'])->name('ajax.consulta');
 Route::post('ajax/register', [AjaxController::class,'registrar'])->name('ajax.register');
 Route::post('ajax/product', [AjaxController::class,'producto'])->name('ajax.product');
+Route::post('search',[SolicitudController::class, 'autosearch'])->name('search');
 //Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
 

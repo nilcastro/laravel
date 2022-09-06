@@ -3,6 +3,16 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
+            <div class="row">
+                <div class="col s6">
+                    <input id="buscar" type="text" class="form-group">
+                    <label for="name">Buscador..</label>
+                </div>
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light btn-primary" type="button" name="action" id="btnBuscar">Buscar
+                    </button>
+                </div>
+            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
@@ -35,7 +45,7 @@
                                         <td>{{ $solicitu->Nombreprove}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
                                         <td><a href="#" class="btn btn-warning">Autorizar</a></td>
-                                    
+
                                     </tr>
                                     @endforeach
                                 </tbody>

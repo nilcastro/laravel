@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class SolicitudController extends Controller
 {
-   
+
     public function index()
     {
-     
+
         //dd($solicitud);
         return view('solicitud/index');
     }
 
-    
+
     public function create()
     {
          $autorizas = user::all();
@@ -26,30 +26,30 @@ class SolicitudController extends Controller
         $proveedores =DB::table('proveedores')
                         ->select('nombreProvee','id')
                         ->get();
-        $productos =\DB::table('productos')
+        $productos =DB::table('productos')
                         ->select('nombreProduc','precio','id')
-                        ->get();              
+                        ->get();
          // dd($productos);
         return view('solicitud/create', compact('autorizas','proveedores','productos'));
     }
 
     public function store(Request $request)
     {
-        
+
         $datosSolicitud = request()->except('_token');
-         dd($datosSolicitud);
+         //dd($datosSolicitud);
          $proveedores = solicitud::firstOrCreate($datosSolicitud);
-        
+
          return redirect('autorizacion');
     }
 
- 
+
     public function show($id)
     {
         //
     }
 
-   
+
     public function edit($id)
     {
         //
@@ -61,9 +61,18 @@ class SolicitudController extends Controller
         //
     }
 
-    
+
     public function destroy($id)
     {
         //
+    }
+
+    public function autosearch(Request $request)
+    {
+        if($request->ajax()){
+            $data = Solicitud::where('nombreauto','LIKE', $request->name.'%')->get();
+
+            return $data;
+        }
     }
 }

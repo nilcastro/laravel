@@ -2,33 +2,30 @@
 </script>
 
   const fechain = document.getElementById('fechain');
- 
+
      window.addEventListener('load',function () {
-  
- if(fechain){
-  fechain.addEventListener('click', function () {
-  alert("hola");
-    console.log(fechain);
+    if(fechain){
+        fechain.addEventListener('click', function () {
+        alert("hola");
+            console.log(fechain);
+        });
+    }
 });
- }
-
-   
-    });
-   
- 
 
 
 
 
 
-   
+
+
+
    // alert("hola");
 
 
 
 
 
-  
+
     //alert("hola");
     $("#Nombreprove").on('change', function() {
       var s = $("#Nombreprove").val();
@@ -47,6 +44,6 @@
         }
       })
     });
-  });
+
 
 
