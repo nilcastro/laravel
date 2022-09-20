@@ -1,6 +1,7 @@
 require('./bootstrap');
 
     new Vue({
-        el: '#main',
-      
+        el: '#main', 
     });
+
+    window.Swal = require('sweetalert2');

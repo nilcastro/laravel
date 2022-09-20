@@ -90,7 +90,7 @@ class LoginController extends Controller
                 'username' => $email_P
               ], [
                
-                // 'password' => bcrypt($password_P),
+              
                 'name' => $proxyUser[0]['NOMBRE'],
                 'apellidos' => $proxyUser[0]['APELLIDOS'],
                 'email' => $proxyUser[0]['EMAIL'],

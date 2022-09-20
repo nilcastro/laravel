@@ -1,24 +1,94 @@
-@extends('layouts.main', ['activePage' => 'solicitud', 'titlePage' => __('Solicitud')])
+@extends('layouts.main', ['activePage' => 'autorizacion', 'titlePage' => __('Autorización')])
 @section('content')
 <div class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <form action="{{ url('/autorizacion') }}" method="post" enctype="multipart/form-data" id="form1">
-          @csrf
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title">Información general </h4>
+        @if(Auth::user()->username == $solicitud->jefe)
+        <div class="card-header card-header-primary">
+          <form action="{{ url('/autorizacion') }}" method="post" enctype="multipart/form-data" id="form1">
+            @csrf
+            <div class="card">
+                  <div class="card-header card-header-primary">
+              <h3 class="card-title">Revisión de Presupuesto</h3>
             </div>
-            @if(count($errors)>0)
-            <div class="alert alert-primary" role="alert">
-              <ul>
-                @foreach( $errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-              </ul>
+              <div class="card-body">
+                <table class="table table-sm">
+                  <thead class="thead-ligth">
+                    <tr>
+                      <th scope="col">Cuenta</th>
+                      <th scope="col">Descripción de la cuenta</th>
+                      <th scope="col">Presupuesto disponible</th>
+                    </tr>
+                  </thead>
+                  <tbody style="text-transform:ucwords;">
+                    <tr>
+                      @if($responses == null)
+                      <td>
+                        <h3>{{ $nada}}</h3>
+                      </td>
+                      @else
+                      @foreach ($responses as $response)
+                      <td class="table-">{{ $response['CUENTA'] }}</td>
+                      <td class="table-">{{ $response['CUENTA_DESCRIPCION']}}</td>
+                      <td class="table-">{{ number_format( $response['PPTO_DISPONIBLE'], 0 , ',','.' ) }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                  @endif
+                </table>
+          @elseif(Auth::user()->username == $solicitud->autoriza )
+          
+        <div class="card-header card-header-primary">
+          <form action="{{ url('/Envioprovee') }}" method="post" enctype="multipart/form-data" id="form1">
+            @csrf
+            <div class="card">
+                  <div class="card-header card-header-primary">
+              <h3 class="card-title">Revisión de Presupuesto</h3>
             </div>
-            @endif
+              <div class="card-body">
+                <table class="table table-sm">
+                  <thead class="thead-ligth">
+                    <tr>
+                      <th scope="col">Cuenta</th>
+                      <th scope="col">Descripción de la cuenta</th>
+                      <th scope="col">Presupuesto disponible</th>
+                    </tr>
+                  </thead>
+                  <tbody style="text-transform:ucwords;">
+                    <tr>
+                      @if($responses == null)
+                      <td>
+                        <h3>{{ $nada}}</h3>
+                      </td>
+                      @else
+                      @foreach ($responses as $response)
+                      <td class="table-">{{ $response['CUENTA'] }}</td>
+                      <td class="table-">{{ $response['CUENTA_DESCRIPCION']}}</td>
+                      <td class="table-">{{ number_format( $response['PPTO_DISPONIBLE'], 0 , ',','.' ) }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                  @endif
+                </table>
+              @else
+            <form action="{{ url('/autorizacion') }}" method="post" enctype="multipart/form-data" id="form1">
+              @csrf
+              @endif
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Información General </h4>
+                </div>
+                @if(count($errors)>0)
+                <div class="alert alert-primary" role="alert">
+                  <ul>
+                    @foreach( $errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                @endif
+               
+            </div>
             <div class="card card-primary">
               <div class="row">
                 <div class="col-md-6 ">
@@ -48,9 +118,12 @@
                   <div class="col mt-4">
                     <strong for="dia" class="text-primary" >Asistentes a la actividad:</strong>
                     <input type="text" name="asistente" id="asistente" value="{{ isset($solicitud->asistente)?$solicitud->asistente:old('asistente') }}" class="form-control" placeholder="Indique la cantidad de personas.">
+                 
+                
+                    <strong for="dia" class="text-primary" >Asistentes a la actividad:</strong>
+                    <input type="text" name="observAsistente" id="observAsistente" value="{{ isset($solicitud->observAsistente)?$solicitud->observAsistente:old('observAsistente') }}" class="form-control" >
                   </div>
                 </div>
-
                 <div class="col-md-6">
                   <div class="col  mt-4">
                     <strong for="dia" class="text-primary" >ID quien autoriza:</strong>
@@ -173,9 +246,26 @@
                       <hr>
                       <div class="row">
                         <div class="col-md-2">
+                        @if(Auth::user()->username == $solicitud->username)
                           <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
-                          <input type="number" name="cantidad" id="cantidad" value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
+                          <input type="number" name="cantidad" id="cantidad" readOnly value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
+                          </div>
+                        <div class="col-md-2">
+                          <strong class=" text-primary" for="hora" class="form-label">Valor unitario</strong>
+                          <input type="number" name="valorunid" id="valorunid"readOnly value="{{ isset($solicitud->valorunid)?$solicitud->valorunid:old('valorunid') }}" class="form-control">
                         </div>
+                        <div class="col-md-3">
+                          <strong class=" text-primary" for="lugar" class="form-label">Valor total</strong>
+                          <input type="number" name="valortota" id="valortota"readOnly value="{{ isset($solicitud->valortota)?$solicitud->valortota:old('valortota') }}" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                          <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
+                          <input class="form-control" type="text" id="persrecibe"readOnly name="persrecibe" value="{{ isset($solicitud->persrecibe)?$solicitud->persrecibe:old('persrecibe') }}">
+                        </div>
+                        @else
+                        <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
+                          <input type="number" name="cantidad" id="cantidad" readOnly value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
+                          </div>
                         <div class="col-md-2">
                           <strong class=" text-primary" for="hora" class="form-label">Valor unitario</strong>
                           <input type="number" name="valorunid" id="valorunid" value="{{ isset($solicitud->valorunid)?$solicitud->valorunid:old('valorunid') }}" class="form-control">
@@ -188,7 +278,9 @@
                           <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
                           <input class="form-control" type="text" id="persrecibe" name="persrecibe" value="{{ isset($solicitud->persrecibe)?$solicitud->persrecibe:old('persrecibe') }}">
                         </div>
-                      </div>
+                        @endif
+                        
+  
                       <hr>
                       <!-- .................................................................................................................. -->
                       <div class="container" id="encuestser" style="display:none ;">
@@ -259,7 +351,7 @@
                           <div class="col-md-12 mt-4">
                             <div class="row">
                             @if(Auth::user()->username == $solicitud->jefe)
-                              <strong class="text-primary" for="recibe" class="form-label">Por favor autorice o rechace la solicitud.</strong>
+                              <h3 class="text-primary" for="recibe" class="form-label">Por favor acepte o rechace la solicitud.</h3>
                            
                               <select name="estado" id="estado" required class="form-control text-danger">
                                 
@@ -267,14 +359,22 @@
                              
                                 <option class="text-success" value="Aceptada">Aceptar</option>
                                 <option value="Rechazada">Rechazar</option>
-                                @else
+
+
+                            @elseif(Auth::user()->username == $solicitud->autoriza)
                                 <strong class="text-primary" for="recibe" class="form-label">Estado de la solicitud.</strong>
                            
                                 <select name="estado" id="estado" class="form-control">
                                 <option value="{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}">{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}</option>
-                             
+                                <option value="Rechazar">Rechazar</option>
+                            @else
                            
-                                @endif
+                                <strong class="text-primary" for="recibe" class="form-label">Estado de la solicitud.</strong>
+                           
+                                <select name="estado" id="estado" class="form-control">
+                                <option value="{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}">{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}</option>
+                            
+                            @endif
                               </select>
                             </div>
                           </div>
@@ -285,24 +385,66 @@
                 </div>
                
                 <input type="hidden" name="jefe" id="jefe" value="{{ isset($solicitud->jefe)?$solicitud->jefe:old('jefe') }}">
+                <input type="hidden" name="email" id="email" value="{{ isset($solicitud->email)?$solicitud->email:old('email') }}">
+                <input type="hidden" name="jefenombre" id="jefenombre" value="{{ isset($solicitud->jefenombre)?$solicitud->jefenombre:old('jefenombre') }}">
                 <input type="hidden" name="id" id="id" value="{{ isset($solicitud->id)?$solicitud->id:old('id') }}">
+                
+
                 <div class="row">
-                  <div class="col-md-2">
-                    <button class="btn btn-success" type="submit">Enviar Solicitud</button>
+                @if(Auth::user()->username == $solicitud->autoriza)
+                @if( $solicitud->estado == 'Envio a proveedor')
+                  <div class="col-md-2 mr-4">
+                    <button class="btn btn-success" type="submit" disabled>Enviar a proveedor</button>
                   </div>
+                  @endif
                   <div class="col-md-2 ml-4"> 
                     <a href="{{ url('solicitud/') }}" class="btn btn-primary">Regresar</a>
                   </div>
+                
+                @elseif(Auth::user()->username == $solicitud->username)
+                @if( $solicitud->estado == 'Envio a proveedor')
+                <div class="col-md-2">
+                    <button class="btn btn-success" id="pendientess"   type="submit" disabled>Aceptada</button>
+                  </div>
+                  @endif
+                  <div class="col-md-2 ml-4"> 
+                    <a href="{{ url('solicitud/') }}" class="btn btn-primary">Regresar</a>
+                  </div>
+                 
+                @else
+                @if( $solicitud->estado == 'Envio a proveedor')
+                <div class="col-md-2">
+                    <button class="btn btn-success" type="submit" disabled>Aceptada</button>
+                    
+                  </div>
+                  @elseif($solicitud->estado == 'Pendiente')
+                  <div class="col-md-2">
+                  <button class="btn btn-success" type="submit" >Aceptada</button>
+                    
+                  </div>
+                
+                  @endif
+                  <div class="col-md-2 ml-4"> 
+                    <a href="{{ url('solicitud/') }}" class="btn btn-primary">Regresar</a>
+                  </div>
+                
+                  @endif
                 </div>
               </div>
             </div>
           </div>
         </form>
       </div>
+     
       @endsection
-
-      <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-      </script>
+      @section('js')
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+      <!-- <script src="{{ asset('js/main/eventos.js') }}"></script> -->
+      @endsection
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script src="{{ asset('js/main/eventos.js') }}"></script>
+      <script src="{{ asset('js/main/profesional.js') }}"></script>
       <script>
         $(document).ready(function() {
 

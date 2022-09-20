@@ -12,10 +12,12 @@ class AsignacionMailable extends Mailable
     use Queueable, SerializesModels;
     public $subject = "Nueva solicitud de refrigerios";
     public $solicitud;
+    public $nombrejefe;
 
-    public function __construct($solicitud)
+    public function __construct($solicitud ,$nombrejefe)
     {
         $this->solicitud = $solicitud;
+        $this->nombrejefe = $nombrejefe;
     }
 
     

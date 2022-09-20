@@ -20,14 +20,14 @@ class EspecialesController extends Controller
     public function index()
     {
         $solicitud = solicitud::get();
-        //dd($solicitud);
+        // dd($solicitud);
 
         $jefe = Auth::user()->jefe;
         $user = Auth::user()->username;
         $admin = Auth::user()->role;
         $programa = Auth::user()->programa;
 
-            $jefes = Solicitud::where('jefe','=',$user )->exists();
+        $jefes = Solicitud::where('jefe','=',$user )->exists();
           
             //dd($jefes);
             if($jefes == true){
@@ -41,7 +41,7 @@ class EspecialesController extends Controller
                 return view('solicitud.index')->with('solicitud',$solicitud);
             
             }elseif($jefes == false){ 
-            //dd($user);
+            // dd($jefes);
             $solicitud = DB::table('solicituds')
                             ->select('solicituds.*')
                             ->where('username', '=',$user )

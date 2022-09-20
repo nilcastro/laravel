@@ -8,21 +8,21 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
 
-      <li class="nav-item{{ $activePage == 'solicitud' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'Solicitud' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('solicitud') }}">
           <i class="material-icons">content_paste</i>
           <p>{{ __('Solicitud de alimentación ') }}</p>
         </a>
       </li>
       @can('role_index')
-      <li class="nav-item{{ $activePage == 'especial' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'Especial' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('especial') }}">
           <i class="material-icons">content_paste</i>
           <p>{{ __('Solicitud de especial') }}</p>
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'autorizacion' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'Autorizacion' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('autorizacion.index') }}">
           <i class="material-icons">
             done    

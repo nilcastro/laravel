@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('autoriza')->nullable();
             $table->string('nombreauto')->nullable();
             $table->string('jefeautori')->nullable();
-            $table->string('centrocosto')->nullable();
+            $table->string('centrocosto');
+            $table->string('observCentrocosto')->nullable();
             $table->string('correoautori')->nullable();
             $table->string('correoautori')->nullable();
             $table->string('unidadAutori');
@@ -55,11 +56,14 @@ return new class extends Migration
             $table->string('productodos')->nullable();
             $table->integer('cantidaddos')->nullable();
             $table->integer('valoruniddos')->nullable();
+            $table->integer('observAsistente')->nullable();
             $table->integer('valortotados')->nullable();
             $table->string('persrecibedos')->nullable();
             $table->string('correoautorizadores')->nullable();
             $table->string('estado')->nullable();
             $table->string('jefe')->nullable();
+            $table->string('email')->nullable();
+            $table->string('jefenombre')->nullable();
             $table->timestamps();
         });
     }

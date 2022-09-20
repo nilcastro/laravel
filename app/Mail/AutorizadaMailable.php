@@ -14,6 +14,7 @@ class AutorizadaMailable extends Mailable
      
     public $subject = "Nueva solicitud aceptada de refrigerios";
     public $solicitud;
+    
     public function __construct($solicitud)
     {
         $this->solicitud = $solicitud;

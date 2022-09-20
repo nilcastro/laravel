@@ -28,12 +28,12 @@ class AjaxController extends Controller
     {
     
         $nombre = $request->nombreauto;
-    
+      
         $nombre = \DB::table('users')
-                    ->select('username','nombre_jefe','apellido_jefe','programa','email','nombre_centroc')
+                    ->select('username','nombre_jefe','apellido_jefe','programa','email','nombre_centroc','id','role')
                     ->where('name', '=',$nombre )
                     ->get();
-        
+     
         return  response($nombre);
     }
 
@@ -64,6 +64,19 @@ class AjaxController extends Controller
         return  response($nombre);  
     }
 
+    public function profes(Request $request)
+    {
+    
+        $nombre = $request->nombreauto;
+      
+        $nombre = \DB::table('users')
+                    ->select('username','nombre_jefe','apellido_jefe','programa','email','nombre_centroc','id','role')
+                    ->where('name', '=',$nombre )
+                    ->get();
+     
+        return  response($nombre);
+    }
+
     public function edit($id)
     {
         
@@ -75,12 +88,6 @@ class AjaxController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

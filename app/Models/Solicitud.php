@@ -18,6 +18,7 @@ class Solicitud extends Model
     'autoriza',
     'jefeautori',
     'centrocosto',
+    'observCentrocosto',
     'correoautori',
     'unidadAutori',
     'username',
@@ -53,6 +54,9 @@ class Solicitud extends Model
     'correoautorizadores',
     'estado',
     'jefe',
+    'observAsistente',
+    'email',
+    'jefenombre'
     ];
 
 }

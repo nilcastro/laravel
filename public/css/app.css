@@ -71,7 +71,6 @@
     scroll-behavior: smooth;
   }
 }
-
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -95,6 +94,7 @@ hr {
   background-color: currentColor;
   border: 0;
   opacity: 0.25;
+ 
 }
 
 hr:not([size]) {
@@ -3973,6 +3973,7 @@ textarea.form-control-lg {
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
   border-color: #e9ecef #e9ecef #dee2e6;
   isolation: isolate;
+
 }
 .nav-tabs .nav-link.disabled {
   color: #6c757d;

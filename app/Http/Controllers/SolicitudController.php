@@ -19,8 +19,8 @@ class SolicitudController extends Controller
     public function index()
     {
         $solicitud = solicitud::get();
-        //dd($solicitud);
-
+        $jefes = Auth::user()->role;
+        // dd($jefes);
         $jefe = Auth::user()->jefe;
         $user = Auth::user()->username;
         $admin = Auth::user()->role;
@@ -28,7 +28,7 @@ class SolicitudController extends Controller
       
         $jefes = Solicitud::where('jefe','=',$user )->exists();
           
-            //dd($jefes);
+            // dd($jefes);
             if($jefes == true){
             $solicitud = DB::table('solicituds')
                             ->select('solicituds.*')
@@ -41,24 +41,25 @@ class SolicitudController extends Controller
             return view('solicitud.index')->with('solicitud',$solicitud);
             
             }elseif($jefes == false){ 
-            //dd($user);
+            //  dd($jefes);
             $solicitud = DB::table('solicituds')
                             ->select('solicituds.*')
                             ->where('username', '=',$user )
                             ->orwhere('autoriza', '=',$user )
                             ->orderBy('id','DESC')
                             ->paginate(10);
-                           
-
-            return view('solicitud.index')->with('solicitud',$solicitud,'estado');
+            return view('solicitud.index')->with('solicitud',$solicitud);
         }
+    
       }
     public function create()
     {
         $con =  '["1"]';
+        $sin = '["1","5"]';
         $autorizas = DB::table('users')
-            ->select('name','apellidos','role','nombre_centroc')
+            ->select('name','apellidos','role','nombre_centroc','id')
             ->where('role','=',$con)
+            ->orwhere('role','=',$sin)
             ->get();
         
         $proveedores = DB::table('proveedores')
@@ -68,7 +69,7 @@ class SolicitudController extends Controller
             // ->select('nombreProduc', 'precio', 'id','id_provee')
             ->get();
            // dd($productos);
-        // dd($productos);
+       
         //  $proxyUsers = Http::withHeaders([
         //     "Username" => "upb_refrigerios",
         //     "Password" => "MFcbPby4x1LBFCvbxI2W"
@@ -79,16 +80,28 @@ class SolicitudController extends Controller
         //   $proxyUserss = $proxyUsers->json();
         // $proveedores = Productos::all()->pluck('id_provee','nombreProduc');
         // paa caragr por medio de la relacion los permisos 
-  
-        return view('solicitud/create', compact('autorizas', 'proveedores', 'productos'));
+
+           $user = [
+                    'Estudiantes',
+                    'Docentes',
+                    'Administrativos',
+                    'Aspirantes',
+                    'Empresarios',
+                    'Egresados'
+            ];
+        return view('solicitud/create', compact('autorizas', 'proveedores', 'productos','user'));
     }
 
     public function store(Request $request)
     {
 
         $datosSolicitud = request()->except('_token', 'mas');
-       
+        dd($datosSolicitud);
+        $array  =  $datosSolicitud['observAsistente'];
+        $arr = json_encode($array);
+        $datosSolicitud['observAsistente']= $arr; 
         $jefe = $datosSolicitud['email_jefe'];
+        $nombrejefe = $datosSolicitud['jefenombre'];
         $provee = $datosSolicitud['Nombreprove'];
         $product = $datosSolicitud['producto'];
 
@@ -102,11 +115,11 @@ class SolicitudController extends Controller
         $solicitud = solicitud::firstOrCreate($datosSolicitud);
        
         // envio de correo electronico al jefe 
-        $correo = new AsignacionMailable($solicitud);
+        $correo = new AsignacionMailable($solicitud,$nombrejefe);
 
         Mail::to($jefe)->send($correo);
 
-        return redirect('autorizacion');
+        return redirect('solicitud');
     }
 
 
@@ -119,7 +132,7 @@ class SolicitudController extends Controller
     public function edit($id)
     {
         $datosSolicitud = $id;
-        dd($datosSolicitud);
+       
         $autorizas = DB::table('users')
             ->select('name', 'role','username','email','programa')
              ->where('role','=','["1"]')
@@ -156,8 +169,55 @@ class SolicitudController extends Controller
     }
 
 
-    public function destroy($id)
+
+    public function autosearch(Request $request)
     {
-        //
+
+        $solicitud = Solicitud::where('Nombreprove','LIKE', $request->name.'%')->get();
+        return response($solicitud);
+    //    if($request->ajax()){
+            
+    //         $data = Solicitud::where('Nombreprove','LIKE', $request->name.'%')->get();
+           
+    //         return $data;
+    //     }
+       
+    }
+    public function autobuscador(Request $request)
+    {
+        $solicitud = DB::table('solicituds')
+                     ->select('nombreauto','nombresolici','duracion','lugaruno','Nombreprove',
+                     'producto','cantidad','valortota','fechain','estado')
+                    ->where('Nombreprove','LIKE', $request->texto.'%')
+                    ->orwhere('fechain','LIKE', $request->texto.'%' )
+                    ->orwhere('nombreauto','LIKE', $request->texto.'%' )
+                    ->orwhere('nombresolici','LIKE', $request->texto.'%' )
+                    ->take(10)
+                    ->get();
+
+        
+        // $solicitud = Solicitud::where('Nombreprove','LIKE', $request->texto.'%')->take(10)->get();
+        // return view('solicitud.index')->with('solicitud',$solicitud);
+        return response($solicitud);
+       
+    }
+    
+    public function profesionales(Request $request)
+    {
+     
+        // if($request->ajax()){
+            
+        //     $data = user::where('username','LIKE', $request->username.'%')->take(100)->get();
+           
+        //     return $data;
+        // }
+        
+            $role = '["4"]';
+            $nomb = DB::table('users')
+                        ->select('username','name','apellidos','programa','cargo','email','nombre_centroc','id')
+                        ->where('role', '=',$role)
+                        ->get();
+            return response($nomb);
+       
     }
 }

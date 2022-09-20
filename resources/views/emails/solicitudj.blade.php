@@ -9,7 +9,7 @@
 <body>
     <h2>Notificación de nueva solicitud de refrigerios</h2>
     <p>Tienes una nueva solicitud de refrigerios de  <p>{{ $solicitud['nombresolici'] }} ( {{ $solicitud['Cargo'] }} )
-        esperando a ser aceptada,</p>
+        esperando a ser aceptada por {{$nombrejefe}}</p>
         por favor ingresa a la plataforma de gestion de refrigerios y bebidas upb y revisa el boton de notificaciones </p>
         <a href="#">www.refrigeriosupb.edu.co</a>
          

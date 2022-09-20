@@ -19,7 +19,7 @@
                                     <label class="col-sm-2 col-form-label" for="input-name">Nombre</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control"  type="text" name="name" id="name" placeholder="Current Password" value="{{ $user->name }} {{ $user->apellidos }}" required="">
+                                            <input class="form-control"  type="text" name="name" id="name" placeholder="Current Password" value="{{ $user->name }} {{ $user->apellidos }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                          @endforeach
-                            <div class="row">
+                        <div class="row">
                             <label class="col-sm-2 col-form-label" for="input-password-confirmation">Permisos</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">

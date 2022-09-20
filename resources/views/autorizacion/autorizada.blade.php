@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'autorizacion', 'titlePage' => __('Autorizacion')])
+@extends('layouts.main', ['activePage' => 'Autorizacion.incex', 'titlePage' => __('Autorizacion')])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -33,8 +33,8 @@
                                         <td>{{ $solicitu->lugaruno}}</td>
                                         <td>{{ $solicitu->Nombreprove}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        <td>{{ $solicitu->estado }}</td>
-                                        <td><a href="{{ url('/autorizacion/'.$solicitu->id.'/edit') }}" class="btn btn-warning">Autorizar</a></td>
+                                        <td><a href="{{ url('/ Envioprovee/'.$solicitu->id.'/edit') }}" class="btn btn-warning">{{ $solicitu->estado }}</a></td>
+                                        <td></td>
                                     
                                     </tr>
                                     @endforeach
@@ -46,5 +46,4 @@
             </div>
         </div>
     </div>
-
     @endsection
