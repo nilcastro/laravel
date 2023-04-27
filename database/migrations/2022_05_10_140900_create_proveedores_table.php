@@ -17,10 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('nombreProvee');
             $table->string('correoProvee')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('nombreContac')->nullable();
             $table->string('telProvee')->nullable();
-            $table->string('produc')->nullable();
-            $table->string('precio')->nullable();
+            $table->string('nombrecontactodos')->nullable();
+            $table->string('telefonodos')->nullable();
+            $table->string('activo')->nullable();
+            $table->string('especial')->nullable();
             $table->timestamps();
         });
     }

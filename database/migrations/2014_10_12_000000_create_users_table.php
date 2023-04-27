@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('apellido_jefe')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->boolval('prosionales')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

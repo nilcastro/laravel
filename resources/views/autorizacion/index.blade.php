@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'Autorizacion', 'titlePage' => __('Autorizacion')])
+@extends('layouts.main', ['activePage' => 'autorizacion', 'titlePage' => __('Autorizacion de solicitudes')])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -39,14 +39,16 @@
                                         <td>{{ $solicitu->Nombreprove}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
                                        
-                                       @if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza )
-                                       <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
-                                       @elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe)
+                                    @if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Rechazar" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe)
                                        <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger">{{ $solicitu->estado}}</td>
-                                       @elseif($solicitu->estado == "Aceptada")
+                                    @elseif($solicitu->estado == "Aceptada")
                                        <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">{{ $solicitu->estado}}</td>
-                                       @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
-                                       @endif
+                                    @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
+                                    @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'Solicitud', 'titlePage' => __('Solicitud')])
+@extends('layouts.main', ['activePage' => 'Solicitud', 'titlePage' => __('Tabla de solicitud')])
 @section('content')
 <div class="content">
   <div class="container-fluid">
@@ -22,28 +22,106 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card col-md-12">
+                <div class="card col-md-12 mb-4">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Lista de solicitudes</h4>
                         <p class="card-category"> todas las solicitudes </p>
                     </div>
-                    {{-- buscador  --}}
-                 
-                  
-                    <div class="col-6 mt-4">
+                    {{-- buscador y modal --}}
+                    <div class="col-8 mt-4">
                         <div class="input-group">
                             <input type="text" class="form-control  text-primary" id="texto" placeholder="Buscar por proveedor, solicitante, fecha o persona que autoriza ">
-                            <a class="btn btn-success " placeholder="Buscar"  id="btnserch">Buscar</a>
+                            <a class="btn btn-success ml-2"data-toggle="modal" data-target=".modal-xl" placeholder="Buscar"  id="btnserch">Buscar</a>
                         </div>                       
                     </div>
-                    
-                   
+                    {{-- <button type="button" class="btn btn-primary">Large modal</button> --}}
+                    <div class="modal modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="myLargeModalLabel">Resultado de busqueda</h5>
+                            <button type="button" class="close" data-dismiss="modal"onclick="location.reload()" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <table class="table">
+                              <thead class="text-primary">
+                                  <tr>
+                                      <th>Autoriza</th>
+                                      <th>Solicitante </th>
+                                      <th>Horas</th>
+                                      <th>Lugar</th>
+                                      <th>Proveedor</th>
+                                      <th>Producto</th>
+                                      <th>Cantidad</th>
+                                      <th>Total</th>
+                                      <th>Fecha evento</th>
+                                      <th>Estado</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="resultados">
+                              </tbody>
+                            </table>   
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button"onclick="location.reload()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{--finaliza modal  --}}
                     <div class="card-body">
-                        <div class="table-responsive sm">
+                        <div class="table-responsive xl">
+                          @forelse($especial as $solicitu)
+                          <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th></th>
+                                    <th>Autoriza</th>
+                                    <th>Solicitante </th>
+                                    <th>Horas</th>
+                                    <th>Lugar</th>
+                                    <th>Proveedor</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                    <th>Fecha evento</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                          <tr>
+                            <td class="text-primary">Solicitud especial</td>
+                            <td>{{ $solicitu->nombreauto}}</td>
+                            <td>{{ $solicitu->nombresolici}}</td>
+                            <td>{{ $solicitu->duracion}}</td>
+                            <td>{{ $solicitu->lugaruno}}</td>
+                            <td>{{ $solicitu->Nombreprove}}</td>
+                            <td>{{ $solicitu->producto}}</td>
+                            <td>{{ $solicitu->cantidad}}</td>
+                            <td>{{ $solicitu->valortota}}</td>
+                            <td class="text-primary">{{ $solicitu->fechain}}</td>
+                            @if( $solicitu->estado == "Pendiente" )
+                            <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
+         
+                            @elseif($solicitu->estado == "Aceptada")
+                            <td  class="text-"><a href="{{ route('especial.edit',$solicitu->id) }}" class="btn btn-warning">{{ $solicitu->estado}}</td>
+                            @elseif($solicitu->estado == "Envio a proveedor")
+                             <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
+                            @else
+                            <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-dark">{{ $solicitu->estado}}</td>
+                           
+                             @endif
+                           
+                        </tr> 
+                        
+                          @empty
+                              
+                          @endforelse
                             <table class="table">
                                 <thead class="text-primary">
                                     <tr>
-                                       
                                         <th>Autoriza</th>
                                         <th>Solicitante </th>
                                         <th>Horas</th>
@@ -56,15 +134,11 @@
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
-                              
-                                <tbody >
-                                    <div id="resultados" class="bg-light border">
-
-                                    </div>
+                                <tbody>
                                     @foreach($solicitud as $solicitu)
                                     @if(Auth::user()->username == $solicitu->autoriza )
                                     <tr>
-                                    
+                                     
                                         <td>{{ $solicitu->nombreauto}}</td>
                                         <td>{{ $solicitu->nombresolici}}</td>
                                         <td>{{ $solicitu->duracion}}</td>
@@ -74,13 +148,16 @@
                                         <td>{{ $solicitu->cantidad}}</td>
                                         <td>{{ $solicitu->valortota}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        @if( $solicitu->estado == "Pendiente" )
-                                       <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
-                    
-                                       @elseif($solicitu->estado == "Aceptada")
+                                    @if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Rechazar" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe)
+                                       <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger">{{ $solicitu->estado}}</td>
+                                    @elseif($solicitu->estado == "Aceptada")
                                        <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">{{ $solicitu->estado}}</td>
-                                       @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
-                                       @endif
+                                    @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
+                                    @endif
                                     </tr>
                                     @elseif(Auth::user()->username == $solicitu->jefe )
                                     <tr>
@@ -93,17 +170,16 @@
                                         <td>{{ $solicitu->cantidad}}</td>
                                         <td>{{ $solicitu->valortota}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        @if( $solicitu->estado == "Pendiente" )
-                                       <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
-                    
-                                       @elseif($solicitu->estado == "Aceptada")
+                                      @if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Rechazar" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe)
+                                       <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger">{{ $solicitu->estado}}</td>
+                                    @elseif($solicitu->estado == "Aceptada")
                                        <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">{{ $solicitu->estado}}</td>
-                                       @elseif($solicitu->estado == "Envio a proveedor")
-                                        <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
-                                       @else
-                                       <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-dark">{{ $solicitu->estado}}</td>
-                                      
-                                        @endif
+                                    @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
+                                    @endif
                                       
                                     </tr>
                                     
@@ -118,21 +194,24 @@
                                         <td>{{ $solicitu->cantidad}}</td>
                                         <td>{{ $solicitu->valortota}}</td>
                                         <td class="text-primary">{{ $solicitu->fechain}}</td>
-                                        @if( $solicitu->estado == "Pendiente" )
-                                       <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
-                    
-                                       @elseif($solicitu->estado == "Aceptada")
+                                        
+                                    @if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="#" class="btn btn-danger" disabled>{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Rechazar" && Auth::user()->username == $solicitu->autoriza )
+                                        <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger" >{{ $solicitu->estado}}</td>
+                                    @elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe)
+                                       <td  class="text-danger"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-danger">{{ $solicitu->estado}}</td>
+                                    @elseif($solicitu->estado == "Aceptada")
                                        <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-warning">{{ $solicitu->estado}}</td>
-                                       @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
-                                       @endif
+                                    @else <td  class="text-"><a href="{{ route('autorizacion.edit',$solicitu->id) }}" class="btn btn-success">{{ $solicitu->estado}}</td>
+                                    @endif
                                     
                                     </tr>
                                     @endif
                                     @endforeach
-                                </tbody>
-                               
+                                </tbody> 
                             </table>     
-                            {{ $solicitud->links() }}                     
+                                         
                         </div>
                     </div>
                 </div>
@@ -142,20 +221,11 @@
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/buscador.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('js/main/eventos.js') }}"></script> --}}
+ 
    
     @endsection
   
  
-    <script>
-  var $table = $('#table')
 
-  $(function() {
-    $('#modalTable').on('shown.modal', function () {
-      $table.bootstrapTable('resetView')
-      alert($table)
-    })
-  })
-</script>
      
      

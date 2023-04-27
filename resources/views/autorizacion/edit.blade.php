@@ -28,12 +28,12 @@
                         <h3>{{ $nada}}</h3>
                       </td>
                       @else
-                      @foreach ($responses as $response)
+                       @foreach ($responses as $response)
                       <td class="table-">{{ $response['CUENTA'] }}</td>
                       <td class="table-">{{ $response['CUENTA_DESCRIPCION']}}</td>
                       <td class="table-">{{ number_format( $response['PPTO_DISPONIBLE'], 0 , ',','.' ) }}</td>
                     </tr>
-                    @endforeach
+                    @endforeach 
                   </tbody>
                   @endif
                 </table>
@@ -62,16 +62,15 @@
                         <h3>{{ $nada}}</h3>
                       </td>
                       @else
-                      @foreach ($responses as $response)
+                       @foreach ($responses as $response)
                       <td class="table-">{{ $response['CUENTA'] }}</td>
                       <td class="table-">{{ $response['CUENTA_DESCRIPCION']}}</td>
                       <td class="table-">{{ number_format( $response['PPTO_DISPONIBLE'], 0 , ',','.' ) }}</td>
                     </tr>
-                    @endforeach
+                    @endforeach 
                   </tbody>
                   @endif
                 </table>
-              @else
             <form action="{{ url('/autorizacion') }}" method="post" enctype="multipart/form-data" id="form1">
               @csrf
               @endif
@@ -99,13 +98,13 @@
                   <div class="col  mt-4">
                     <strong for="dia" class="text-primary" >Breve descripción del evento o
                       actividad:</strong>
-                    <input type="text" name="description" id="description" value="{{ isset($solicitud->description)?$solicitud->description:old('description') }}" class="form-control" placeholder="Indique la descripción del evento">
+                    <input type="text" name="description" id="description"readonly  value="{{ isset($solicitud->description)?$solicitud->description:old('description') }}" class="form-control" placeholder="Indique la descripción del evento">
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="text-primary" >Duración de la actividad(Horas):</strong>
-                    <input type="number" name="duracion" id="duracion" value="{{ isset($solicitud->duracion)?$solicitud->duracion:old('duracion') }}" class="form-control" placeholder="Indique el número de horas para realizar del evento ">
+                    <input type="number" name="duracion" id="duracion"readonly value="{{ isset($solicitud->duracion)?$solicitud->duracion:old('duracion') }}" class="form-control" placeholder="Indique el número de horas para realizar del evento ">
                   </div>
-                  {{ isset($solicitud->ID_jefe)?$solicitud->ID_jefe:old('ID_jefe') }}
+                      {{ isset($solicitud->ID_jefe)?$solicitud->ID_jefe:old('ID_jefe') }}
                   <div class="col mt-4">
                     <strong for="fechain" class="text-primary" >Fecha inicio de la activiad:</strong>
                     <input type="date" name="fechain" id="fechain" value="{{ isset($solicitud->fechain)?$solicitud->fechain:old('fechain') }}" class="form-control" placeholder="Indique las horas de duración del evento ">
@@ -117,7 +116,7 @@
                   </div>
                   <div class="col mt-4">
                     <strong for="dia" class="text-primary" >Asistentes a la actividad:</strong>
-                    <input type="text" name="asistente" id="asistente" value="{{ isset($solicitud->asistente)?$solicitud->asistente:old('asistente') }}" class="form-control" placeholder="Indique la cantidad de personas.">
+                    <input type="text" name="asistente" id="asistente"readonly value="{{ isset($solicitud->asistente)?$solicitud->asistente:old('asistente') }}" class="form-control" placeholder="Indique la cantidad de personas.">
                  
                 
                     <strong for="dia" class="text-primary" >Asistentes a la actividad:</strong>
@@ -134,6 +133,12 @@
                     <select name="nombreauto" id="nombreauto" class="form-control">
                       <option value="{{ isset($solicitud->nombreauto)?$solicitud->nombreauto:old('nombreauto') }}">{{ isset($solicitud->nombreauto)?$solicitud->nombreauto:old('nombreauto') }}</option><br>
                     </select>
+                    <div class="col-md-12 mt-4" >
+                      <label for="dia" class=" text-primary">Nombre del profesional  de gestion de proyectos:</label>
+                      <option value="{{ isset($solicitud->profesional)?$solicitud->profesional:old('profesional') }}">{{ isset($solicitud->profesional)?$solicitud->profesional:old('profesional') }}</option><br>
+                   
+                        </select>
+                    </div>
                   </div>
                   <input type="hidden" name="correoautorizadores" id="correoautorizadores" value="{{ isset($solicitud->correoautorizadores)?$solicitud->correoautorizadores:old('correoautorizadores') }}">
                   <div class="col mt-4">
@@ -210,7 +215,7 @@
                       <strong for="Cargo" class="text-primary" >Teléfono de contacto 2:</strong>
                       <input type="text" name="telefonodos" id="telefonodos" class="form-control" value="{{ isset($solicitud->telefonodos)?$solicitud->telefonodos:old('telefonodos') }}">
                     </div>
-                    <p type="" name="id" id="id" value=""></p>
+                    <p type="" name="id" id="id"  value="{{ isset($solicitud->id)?$solicitud->id:old('id') }}"></p>
                   </div>
 
                 </div>
@@ -222,7 +227,7 @@
                       </h4>
                     </div>
                     <div class="card-body">
-                      <div class="row">
+                      <div class="row ml-1">
                         <div class="col-md-2">
                           <strong class=" text-primary" for="fecha" class="form-label">Fecha</strong>
                           <input type="date" name="fechasoliciuno" id="fechasoliciuno" value="{{ isset($solicitud->fechasoliciuno)?$solicitud->fechasoliciuno:old('fechasoliciuno') }}" class="form-control" class="form-control" aria-label="Cargo">
@@ -236,20 +241,22 @@
                           <input type="text" name="lugaruno" id="lugaruno" value="{{ isset($solicitud->lugaruno)?$solicitud->lugaruno:old('lugaruno') }}" class="form-control">
                         </div>
                         <div class="col-md-4">
+                          <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
+                          <input class="form-control" type="text" id="persrecibe" name="persrecibe" value="{{ isset($solicitud->persrecibe)?$solicitud->persrecibe:old('persrecibe') }}">
+                        </div>
+                      </div> 
+                      <div class="row ml-1">
+                        <div class="col-md-4">
                           <strong class=" text-primary" for="producto" class="form-label">Producto a entregar</strong>
-                          <select type="text" name="producto" id="producto" value="" class="form-control">
+                          <select type="text" name="producto" id="producto"   class="form-control">
                             <option value="{{ isset($solicitud->producto)?$solicitud->producto:old('producto') }}">{{ isset($solicitud->producto)?$solicitud->producto:old('producto') }}
                             </option>
                           </select>
                         </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-md-2">
-                        @if(Auth::user()->username == $solicitud->username)
+                     
                           <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
-                          <input type="number" name="cantidad" id="cantidad" readOnly value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
-                          </div>
+                          <input type="number" name="cantidad" id="cantidad"  value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
+                        </div>
                         <div class="col-md-2">
                           <strong class=" text-primary" for="hora" class="form-label">Valor unitario</strong>
                           <input type="number" name="valorunid" id="valorunid"readOnly value="{{ isset($solicitud->valorunid)?$solicitud->valorunid:old('valorunid') }}" class="form-control">
@@ -258,32 +265,14 @@
                           <strong class=" text-primary" for="lugar" class="form-label">Valor total</strong>
                           <input type="number" name="valortota" id="valortota"readOnly value="{{ isset($solicitud->valortota)?$solicitud->valortota:old('valortota') }}" class="form-control">
                         </div>
-                        <div class="col-md-4">
-                          <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
-                          <input class="form-control" type="text" id="persrecibe"readOnly name="persrecibe" value="{{ isset($solicitud->persrecibe)?$solicitud->persrecibe:old('persrecibe') }}">
-                        </div>
-                        @else
-                        <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
-                          <input type="number" name="cantidad" id="cantidad" readOnly value="{{ isset($solicitud->cantidad)?$solicitud->cantidad:old('cantidad') }}" class="form-control">
-                          </div>
-                        <div class="col-md-2">
-                          <strong class=" text-primary" for="hora" class="form-label">Valor unitario</strong>
-                          <input type="number" name="valorunid" id="valorunid" value="{{ isset($solicitud->valorunid)?$solicitud->valorunid:old('valorunid') }}" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                          <strong class=" text-primary" for="lugar" class="form-label">Valor total</strong>
-                          <input type="number" name="valortota" id="valortota" value="{{ isset($solicitud->valortota)?$solicitud->valortota:old('valortota') }}" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                          <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
-                          <input class="form-control" type="text" id="persrecibe" name="persrecibe" value="{{ isset($solicitud->persrecibe)?$solicitud->persrecibe:old('persrecibe') }}">
-                        </div>
-                        @endif
+                       
+                      </div>
+                        {{-- @endif --}}
                         
   
                       <hr>
                       <!-- .................................................................................................................. -->
-                      <div class="container" id="encuestser" style="display:none ;">
+                      <div class="container" id="encuestser" style="display: ;">
                         <div class="row">
                           <div class="col-md-2">
                             <strong class=" text-primary" for="fecha" class="form-label">Fecha</strong>
@@ -298,59 +287,211 @@
                             <input type="text" name="lugardos" id="lugardos" value="{{ isset($solicitud->lugardos)?$solicitud->lugardos:old('lugardos') }}" class="form-control">
                           </div>
                           <div class="col-md-4">
+                            <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
+                            <input class="form-control" type="text" id="persrecibedos" name="persrecibedos" value="{{ isset($solicitud->persrecibedos)?$solicitud->persrecibedos:old('persrecibedos') }}">
+                          </div>
+                        </div>
+                       
+                        <div class="row mb-4">
+                          <div class="col-md-4">
                             <strong class=" text-primary" for="producto" class="form-label">Producto a entregar</strong>
                             <select type="text" name="productodos" id="productodos" value="{{ isset($solicitud->productodos)?$solicitud->productodos:old('productodos') }}" class="form-control">
                 
                               <option value="{{ isset($solicitud->productodos)?$solicitud->productodos:old('productodos') }}">
-                          {{ isset($solicitud->productodos)?$solicitud->productodos:old('productodos') }}
+                                    {{ isset($solicitud->productodos)?$solicitud->productodos:old('productodos') }}
                               </option>
                              
                             </select>
                           </div>
-                        </div>
-                        <hr>
-                        <div class="row">
                           <div class="col-md-2">
                             <strong class=" text-primary" for="Cantidad" class="form-label">Cantidad</strong>
                             <input type="number" name="cantidaddos" id="cantidaddos" value="{{ isset($solicitud->cantidaddos)?$solicitud->cantidaddos:old('cantidaddos') }}" class="form-control">
                           </div>
                           <div class="col-md-2">
                             <strong class=" text-primary" for="hora" class="form-label">Valor unitario</strong>
-                            <input type="number" name="valoruniddos" id="valoruniddos" value="{{ isset($solicitud->valoruniddos)?$solicitud->valoruniddos:old('valoruniddos') }}" class="form-control">
+                            <input type="number" name="valoruniddos" id="valoruniddos"readOnly value="{{ isset($solicitud->valoruniddos)?$solicitud->valoruniddos:old('valoruniddos') }}" class="form-control">
                           </div>
                           <div class="col-md-3">
                             <strong class=" text-primary" for="lugar" class="form-label">Valor total</strong>
-                            <input type="number" name="valortotados" id="valortotados" value="{{ isset($solicitud->valortotados)?$solicitud->valortotados:old('valortotados') }}" class="form-control">
+                            <input type="number" name="valortotados" id="valortotados"readOnly value="{{ isset($solicitud->valortotados)?$solicitud->valortotados:old('valortotados') }}" class="form-control">
                           </div>
-                          <div class="col-md-4">
-                            <strong class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</strong>
-                            <input class="form-control" type="text" id="persrecibedos" name="persrecibedos" value="{{ isset($solicitud->persrecibedos)?$solicitud->persrecibedos:old('persrecibedos') }}">
-                          </div>
+                          
+                          <hr>
                         </div>
-                      </div>
-
+                     
+                      {{-- ACA EMPIEZA --}}
+                           {{-- producto tres----- --}}
+                           <hr>
+                      
+                           <hr>
+                           <div class="row mt-4">
+                             <div class="col-md-2">
+                               <label class=" text-primary" for="fecha" class="form-label">Fecha de entrega</label>
+                               <input type="date" name="fechasolicitres" id="fechasolicitres" value="{{ isset($solicitud->fechasolicitres)?$solicitud->fechasolicitres:old('fechasolicitres') }}" class="form-control" min=<?php $hoy = date("Y-m-d");
+                                    echo $hoy; ?> max="2030-09-15" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-2">
+                                 <label class=" text-primary" for="hora" class="form-label">Hora</label>horatres
+                                 <input type="time" name="horatres" id="horatres" value="{{ isset($solicitud->horatres)?$solicitud->horatres:old('horatres') }}" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-3">
+                                 <label class=" text-primary" for="lugar" class="form-label">Lugar</label>
+                                 <input type="text" name="lugartres" id="lugartres"  value="{{ isset($solicitud->lugartres)?$solicitud->lugartres:old('lugartres') }}" class="form-control">
+                             </div>
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</label>
+                               <input class="form-control" type="text" id="persrecibetres" name="persrecibetres"  value="{{ isset($solicitud->persrecibetres)?$solicitud->fechasolicitres:old('persrecibetres') }}">
+                             </div>
+                           </div>
+                     
+                           <div class="row  mt-4" >
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="productotres" class="form-label">Producto a entregar</label>
+                               <select type="text" name="productotres" id="productotres"  value="{{ isset($solicitud->productotres)?$solicitud->productotres:old('productotres') }}" class="form-control">
+                                    <option value="{{ isset($solicitud->productotres)?$solicitud->productotres:old('productotres') }}">
+                                      {{ isset($solicitud->productotres)?$solicitud->productotres:old('productotres') }}
+                                    </option>
+                               </select>                      
+                           </div>
+                             <div class="col-md-2">
+                               <label class=" text-primary" for="Cantidad" class="form-label">Cantidad</label>
+                               <input type="number" name="cantidatres" id="cantidatres"  value="{{ isset($solicitud->cantidatres)?$solicitud->cantidatres:old('cantidatres') }}" class="form-control">
+                             </div>
+                             <div class="col-md-2">
+                               <label class=" text-primary" for="hora" class="form-label">Valor unitario</label>
+                               <input type="number" name="valorunidtres" id="valorunidtres"readOnly  value="{{ isset($solicitud->valorunidtres)?$solicitud->valorunidtres:old('valorunidtres') }}" class="form-control">
+                             </div>
+                             <div class="col-md-3">
+                               <label class=" text-primary" for="lugar" class="form-label">Subtotal</label>
+                               <input type="number" name="valortotatres" id="valortotatres"readOnly  value="{{ isset($solicitud->valortotatres)?$solicitud->valortotatres:old('valortotatres') }}" class="form-control">
+                             </div>
+                            
+                           </div>
+                           {{-- ----------cuatroproductos------------------------ --}}
+                           <hr>
+                           <hr>
+                           <div class="row mt-4">
+                             <div class="col-md-2">
+                               <label class=" text-primary" for="fecha" class="form-label">Fecha de entrega</label>
+                               <input type="date" name="fechasolicicuatro" id="fechasolicicuatro"  value="{{ isset($solicitud->fechasolicicuatro)?$solicitud->fechasolicicuatro:old('fechasolicicuatro') }}" class="form-control" min=<?php $hoy = date("Y-m-d");
+                                                                                                                               echo $hoy; ?> max="2030-09-15" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-2">
+                                 <label class=" text-primary" for="hora" class="form-label">Hora</label>
+                                 <input type="time" name="horacuatro" id="horacuatro"  value="{{ isset($solicitud->horacuatro)?$solicitud->horacuatro:old('horacuatro') }}" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-3">
+                                 <label class=" text-primary" for="lugar" class="form-label">Lugar</label>
+                                 <input type="text" name="lugarcuatro" id="lugarcuatro"  value="{{ isset($solicitud->lugarcuatro)?$solicitud->lugarcuatro:old('lugarcuatro') }}" class="form-control">
+                             </div>
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</label>
+                               <input class="form-control" type="text" id="persrecibecuatro" name="persrecibecuatro"  value="{{ isset($solicitud->persrecibecuatro)?$solicitud->persrecibecuatro:old('persrecibecuatro') }}">
+                             </div>
+                           </div>
+                     
+                           <div class="row  mt-4" >
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="productodos" class="form-label">Producto a entregar</label>
+                               <select type="text" name="productocuatro" id="productocuatro"  value="{{ isset($solicitud->productocuatro)?$solicitud->productocuatro:old('productocuatro') }}" class="form-control">
+                                      <option value="{{ isset($solicitud->productocuatro)?$solicitud->productocuatro:old('productocuatro') }}">
+                                        {{ isset($solicitud->productocuatro)?$solicitud->productocuatro:old('productocuatro') }}
+                                      </option>
+                               </select>                      
+                           </div>
+                           <div class="col-md-2">
+                             <label class=" text-primary" for="Cantidad" class="form-label">Cantidad</label>
+                             <input type="number" name="cantidadcuatro" id="cantidadcuatro"  value="{{ isset($solicitud->cantidadcuatro)?$solicitud->cantidadcuatro:old('cantidadcuatro') }}" class="form-control">
+                           </div>
+                           <div class="col-md-2">
+                             <label class=" text-primary" for="hora" class="form-label">Valor unitario</label>
+                             <input type="number" name="valorunidcuatro" id="valorunidcuatro"readOnly  value="{{ isset($solicitud->valorunidcuatro)?$solicitud->valorunidcuatro:old('valorunidcuatro') }}" class="form-control">
+                           </div>
+                           <div class="col-md-3">
+                             <label class=" text-primary" for="lugar" class="form-label">Subtotal</label>
+                             <input type="number" name="valortotacuatro" id="valortotacuatro" readOnly value="{{ isset($solicitud->valortotacuatro)?$solicitud->valortotacuatro:old('valortotacuatro') }}" class="form-control">
+                           </div>
+               
+                         </div>
+                         {{-- -----------cinco  productos------------------------ --}}
+                         <hr>
+                         <hr>
+                           <div class="row mt-4">
+                             <div class="col-md-2">
+                               <label class=" text-primary" for="fecha" class="form-label">Fecha de entrega</label>
+                               <input type="date" name="fechasolicicinco" id="fechasolicicinco"  value="{{ isset($solicitud->fechasolicicinco)?$solicitud->fechasolicicinco:old('fechasolicicinco') }}" class="form-control" min=<?php $hoy = date("Y-m-d");
+                                                                                                                               echo $hoy; ?> max="2030-09-15" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-2">
+                                 <label class=" text-primary" for="hora" class="form-label">Hora</label>
+                                 <input type="time" name="horacinco" id="horacinco"  value="{{ isset($solicitud->horacinco)?$solicitud->horacinco:old('horacinco') }}" class="form-control" aria-label="Cargo">
+                             </div>
+                             <div class="col-md-3">
+                                 <label class=" text-primary" for="lugar" class="form-label">Lugar</label>
+                                 <input type="text" name="lugarcinco" id="lugarcinco"  value="{{ isset($solicitud->lugarcinco)?$solicitud->lugarcinco:old('lugarcinco') }}" class="form-control">
+                             </div>
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="recibe" class="form-label">Recibe a satisfacción</label>
+                               <input class="form-control" type="text" id="persrecibecinco" name="persrecibecinco"  value="{{ isset($solicitud->persrecibecinco)?$solicitud->persrecibecinco:old('persrecibecinco') }}">
+                             </div>
+                           </div>
+                     
+                           <div class="row  mt-4" >
+                             <div class="col-md-4">
+                               <label class=" text-primary" for="productodos" class="form-label">Producto a entregar</label>
+                               <select type="text" name="productocinco" id="productocinco"  value="{{ isset($solicitud->productocinco)?$solicitud->productocinco:old('productocinco') }}" class="form-control">
+                                        <option value="{{ isset($solicitud->productocinco)?$solicitud->productocinco:old('productocinco') }}">
+                                          {{ isset($solicitud->productocinco)?$solicitud->productocinco:old('productocinco') }}
+                                        </option>
+                               </select>                      
+                           </div>
+                           <div class="col-md-2">
+                             <label class=" text-primary" for="Cantidad" class="form-label">Cantidad</label>
+                             <input type="number" name="cantidadcinco" id="cantidadcinco"  value="{{ isset($solicitud->cantidadcinco)?$solicitud->cantidadcinco:old('cantidadcinco') }}" class="form-control">
+                           </div>
+                           <div class="col-md-2">
+                             <label class=" text-primary" for="hora" class="form-label">Valor unitario</label>
+                             <input type="number" name="valorunidcinco" id="valorunidcinco" readOnly value="{{ isset($solicitud->valorunidcinco)?$solicitud->valorunidcinco:old('valorunidcinco') }}" class="form-control">
+                           </div>
+                           <div class="col-md-3">
+                             <label class=" text-primary" for="lugar" class="form-label">Subtotal</label>
+                             <input type="number" name="valortotacinco"readonly id="valortotacinco"readOnly  value="{{ isset($solicitud->valortotacinco)?$solicitud->valortotacinco:old('valortotacinco') }}" class="form-control">
+                           </div>
+                                
+                         </div>
+                         <div class="row mt-4 ml-2"  >
+                         <div class="col-md-6">
+                           <label class=" text-primary" for="lugar" class="form-label">Valor total de la factura:</label>
+                           <input type="number" name="valortotalfinal"readonly id="valortotalfinal"  value="{{ isset($solicitud->valortotalfinal)?$solicitud->valortotalfinal:old('valortotalfinal') }}" class="form-control">
+                         </div>
+                              
+                       </div>
+                       {{-- -----------fin productos------------------------ --}}
+                     </div>
+                        {{-- ACA TERMINA  --}}
                       <hr>
-                      <div class="col-md-3">
-                        <div class="row">
-                          <strong class=" text-primary" for="recibe" class="form-label">¿Desea pedir mas de un producto?</strong>
+                     
+                      <div class="row  ml-2 mt-2" >
+                        {{-- <div class="col-md-5">
+                          <h3 class="text-primary" for="recibe" class="form-label">¿Desea pedir mas de un producto?</h3>
                           <div class="form-check form-check-radio">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="mas" id="mas" value="SI">SI
+                              <input class="form-check-input" type="radio" name="mas" id="mas" value="SI" checked>SI
                               <span class="circle">
                                 <span class="check"></span>
                               </span>
                             </label>
                             <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="mas" id="mas" value="NO" checked>NO
+                              <input class="form-check-input" type="radio" name="mas" id="mas" value="NO" >NO
                               <span class="circle">
                                 <span class="check"></span>
                               </span>
                             </label>
                           </div>
-                          <br>
-                          <div class="col-md-12 mt-4">
-                            <div class="row">
-                            @if(Auth::user()->username == $solicitud->jefe)
+                        </div> --}}
+                        <div class="col-md-6 ml-4">
+                           
+                            @if((Auth::user()->username == $solicitud->jefe) )
                               <h3 class="text-primary" for="recibe" class="form-label">Por favor acepte o rechace la solicitud.</h3>
                            
                               <select name="estado" id="estado" required class="form-control text-danger">
@@ -358,15 +499,18 @@
                                 <option  value="{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}">{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}</option>
                              
                                 <option class="text-success" value="Aceptada">Aceptar</option>
-                                <option value="Rechazada">Rechazar</option>
+                                <option  value="Rechazada">Rechazar</option>
 
 
                             @elseif(Auth::user()->username == $solicitud->autoriza)
                                 <strong class="text-primary" for="recibe" class="form-label">Estado de la solicitud.</strong>
                            
                                 <select name="estado" id="estado" class="form-control">
-                                <option value="{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}">{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}</option>
-                                <option value="Rechazar">Rechazar</option>
+                                  <option value="{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}">{{ isset($solicitud->estado)?$solicitud->estado:old('estado') }}</option>
+                                  <option value=""></option>
+                                  <option value="Enviar a proveedor">Enviar a proveedor</option>
+                                  <option value="Estado modificado">Modificar estado</option>
+                                  <option value="Rechazar">Rechazar</option>
                             @else
                            
                                 <strong class="text-primary" for="recibe" class="form-label">Estado de la solicitud.</strong>
@@ -376,8 +520,12 @@
                             
                             @endif
                               </select>
-                            </div>
+                            
                           </div>
+                        </div>
+                        <div class="col-md-8 mt-4">
+                          
+                            <textarea name="observacionincomplet" id="observacionincomplet" cols="130" rows="5" style="display: none" placeholder="Por favor ingrese una breve descripción del motivo por el cual fue rechazado"></textarea>
                         </div>
                       </div>
                     </div>
@@ -392,9 +540,17 @@
 
                 <div class="row">
                 @if(Auth::user()->username == $solicitud->autoriza)
-                @if( $solicitud->estado == 'Envio a proveedor')
+                @if( $solicitud->estado == 'Aceptada')
                   <div class="col-md-2 mr-4">
-                    <button class="btn btn-success" type="submit" disabled>Enviar a proveedor</button>
+                    <button class="btn btn-success" type="submit" >Enviar a proveedor</button>
+                  </div>
+                  @elseif( $solicitud->estado == 'Envio a proveedor')
+                  <div class="col-md-2">
+                    <button class="btn btn-success" id="actualizar" type="submit" >Cambiar estado</button>
+                  </div>
+                   @elseif( $solicitud->estado == 'Estado modificado')
+                  <div class="col-md-2">
+                    <button class="btn btn-success" id="actualizar" type="submit" >Enviar a proveedor</button>
                   </div>
                   @endif
                   <div class="col-md-2 ml-4"> 
@@ -419,23 +575,22 @@
                   </div>
                   @elseif($solicitud->estado == 'Pendiente')
                   <div class="col-md-2">
-                  <button class="btn btn-success" type="submit" >Aceptada</button>
+                    <button class="btn btn-success" id="aceptado" type="submit" style="display: block" >Aceptada</button>
+                    <button class="btn btn-danger" id="rechazado" type="submit"style="display: none" >Rechazada</button>
                     
                   </div>
-                
                   @endif
                   <div class="col-md-2 ml-4"> 
                     <a href="{{ url('solicitud/') }}" class="btn btn-primary">Regresar</a>
                   </div>
-                
                   @endif
+                 
                 </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-     
       @endsection
       @section('js')
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

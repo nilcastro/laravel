@@ -15,7 +15,7 @@ class ProveedoresController extends Controller
      */
     public function index()
     {
-       $proveedores = Proveedores::all();
+       $proveedores = Proveedores::paginate(4);
 
         return view('proveedores.index',compact('proveedores'));
     }
@@ -29,7 +29,7 @@ class ProveedoresController extends Controller
     public function store(Request $request)
     {
         $proveedores = request()->except('_token');
-        //dd($datoprovee);
+        dd($proveedores);
         $proveedores = Proveedores::firstOrCreate($proveedores);
         
         return redirect('proveedores');
@@ -55,8 +55,11 @@ class ProveedoresController extends Controller
         $id = $productos['id'];
         $productos = Proveedores::findOrFail($id);
         $productos->nombreProvee = $request->nombreProvee;
+        $productos->direccion = $request->direccion;
         $productos->correoProvee = $request->correoProvee;
         $productos->nombreContac = $request->nombreContac;
+        $productos->nombrecontactodos = $request->nombrecontactodos;
+        $productos->telefonodos = $request->telefonodos;
         $productos->telProvee = $request->telProvee;
         $productos->save();
         return redirect('proveedores');

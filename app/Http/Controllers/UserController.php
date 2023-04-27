@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\View\Component;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -55,10 +55,13 @@ class UserController extends Controller
   
     public function edit(user $user)
     {
-        $roles = role::all()->pluck('name','id');
-        $user->load('roles');
-        // dd( $user);
+            
+         $roles = role::all()->pluck('name','id');
+           
+         $user->load('roles');
+        
         return view('user.edit', compact('user','roles'));
+        
     }
 
 

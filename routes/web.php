@@ -29,7 +29,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
- Auth::routes();
+//  Auth::routes();
 // Auth::routes(["password/reset" => false]);
 
 Route::group(['Middleware' => 'auth'], function(){
@@ -49,10 +49,12 @@ Route::group(['Middleware' => 'auth'], function(){
     Route::resource('roles', RolesController::class);
     Route::resource('user', UserController::class);
     Route::resource('Envioprovee', EnvioproveeController::class);
-    // Route::resource('especiales', EspecialesController::class);
+    Route::resource('especiales', EspecialesController::class);
+    // Route::resource('especial', EspecialesController::class);
 
-});
-// Route::resource('solicitud', SolicitudController::class);
+
+Route::get('especial/create', [EspecialesController::class, 'create'])->name('especial/create')->middleware('auth');
+Route::get('especial/edit', [EspecialesController::class, 'edit'])->name('especial/edit')->middleware('auth');
 Route::get('solicitud/create', [SolicitudController::class, 'create'])->name('solicitud/create')->middleware('auth');
 Route::post('solicitud', [SolicitudController::class, 'store'])->name('solicitud/store')->middleware('auth');
 Route::put('solicitud/.$solicitu->id./edit',[ SolicitudController::class,'edit'])->name('solicitud.edit')->middleware('auth');
@@ -61,16 +63,32 @@ Route::post('/productos/update,$producto->id', [ProductosController::class, 'upd
 Route::post('/proveedores/update,$producto->id', [ProveedoresController::class, 'update'])->name('/proveedores/update,$producto->id');
 Route::post('proveedores/create', [ProveedoresController::class, 'store'])->name('proveedores/create');
 Route::post('/roles/update,$role->id', [RolesController::class, 'update'])->name('/roles/update,$roles->id');
+Route::post('/especiales/jefes', [EspecialesController::class, 'jefes'])->name('/especiales/jefes');
+Route::post('/EnvioproveeEspecial', [EspecialesController::class, 'envioprovee'])->name('/EnvioproveeEspecial');
+Route::get('reporte', [AutorizacionController::class, 'reportes'])->name('reporte');
+Route::get('reportess', [AutorizacionController::class, 'reportesvista'])->name('reportess');
+Route::get('reporteautori/,$solicitu->name', [AutorizacionController::class, 'reporteautori'])->name('reporteautori');
 
-Route::post('ajax/consulta', [AjaxController::class,'store'])->name('ajax.consulta');
+
+
+Route::post('especial/ajax.product', [AjaxController::class,'producto'])->name('ajax.product');
+Route::post('especial/profesiona', [SolicitudController::class,'profesionalesuno'])->name('profesiona');
+Route::get('especial/profes', [SolicitudController::class,'profesionales'])->name('profes');
+Route::post('especial/ajax.consulta', [AjaxController::class,'store'])->name('ajax.consulta');
+Route::post('solicitud/ajax.consulta', [AjaxController::class,'store'])->name('ajax.consulta');
 Route::post('ajax/profes', [AjaxController::class,'store'])->name('ajax.profes');
 Route::post('ajax/register', [AjaxController::class,'registrar'])->name('ajax.register');
-Route::post('ajax/product', [AjaxController::class,'producto'])->name('ajax.product');
+Route::post('ajax/especial', [AjaxController::class,'registrar'])->name('ajax.especial');
+Route::post('solicitud/ajax.product', [AjaxController::class,'producto'])->name('ajax.product');
+
 Route::post('search',[SolicitudController::class, 'autosearch'])->name('search');
 Route::get('solicitud/profes', [SolicitudController::class,'profesionales'])->name('profes');
+Route::post('solicitud/profesiona', [SolicitudController::class,'profesionalesuno'])->name('profesiona');
 Route::get('buscador', [SolicitudController::class,'autobuscador'])->name('buscador');
 //Route::post('permissiona/'.$permission->id.'/create', [ProveedoresController::class, 'store'])->name('proveedores/'.$permission->id.'create');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+ Auth::routes(['password/reset' => false]);
 
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Auth::routes(['password/reset' => false]);
+});
+ 

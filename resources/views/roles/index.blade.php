@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer ml-auto mr-auto">
-                                    {{ $role->links() }}
+                                  
                                 </div>
                             </div>
                         </div>

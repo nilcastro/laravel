@@ -20,10 +20,13 @@ class Proveedores extends Model
     protected $fillable = [
         'nombreProvee',
         'correoProvee',
+        'direccion',
         'nombreContac',
         'telProvee',
-        'produc',
-        'precio'
+        'nombrecontactodos',
+        'telefonodos',
+        'activo',
+        'especial',
     ];
 
 }

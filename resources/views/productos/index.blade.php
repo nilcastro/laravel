@@ -13,7 +13,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">Formulario nuevo producto.</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal"onclick="location.reload()" aria-label="Close">
                             <span arial-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -28,7 +28,7 @@
 
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="form-label" for="exampleCheck1">Descripcion del producto</label>
+                                    <label class="form-label" for="exampleCheck1">Descripción del producto</label>
                                     <input type="text" class="form-control" name="descrProduc" id="descrProduc">
                                 </div>
                                 <div class="form-group mb-3">
@@ -52,7 +52,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary"onclick="location.reload()" data-dismiss="modal">Cerrar</button>
                         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="exampleModalLabel">Formulario editar producto</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"onclick="location.reload()" aria-label="Close">
                                                         <span arial-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -138,7 +138,7 @@
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button type="button" class="btn btn-secondary"onclick="location.reload()" data-dismiss="modal">Cerrar</button>
                                                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                                 </div>
                                             </div>
@@ -148,6 +148,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="d-flex justify-content-center">{!! $productos->links() !!}</div> 
                     </div>
                 </div>
             </div>

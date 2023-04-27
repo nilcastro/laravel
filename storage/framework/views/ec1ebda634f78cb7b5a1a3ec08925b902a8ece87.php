@@ -39,14 +39,16 @@
                                         <td><?php echo e($solicitu->Nombreprove); ?></td>
                                         <td class="text-primary"><?php echo e($solicitu->fechain); ?></td>
                                        
-                                       <?php if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza ): ?>
-                                       <td  class="text-danger"><a href="#" class="btn btn-danger" disabled><?php echo e($solicitu->estado); ?></td>
-                                       <?php elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe): ?>
+                                    <?php if( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->autoriza ): ?>
+                                        <td  class="text-danger"><a href="#" class="btn btn-danger" disabled><?php echo e($solicitu->estado); ?></td>
+                                    <?php elseif( $solicitu->estado == "Rechazar" && Auth::user()->username == $solicitu->autoriza ): ?>
+                                        <td  class="text-danger"><a href="<?php echo e(route('autorizacion.edit',$solicitu->id)); ?>" class="btn btn-danger" ><?php echo e($solicitu->estado); ?></td>
+                                    <?php elseif( $solicitu->estado == "Pendiente" && Auth::user()->username == $solicitu->jefe): ?>
                                        <td  class="text-danger"><a href="<?php echo e(route('autorizacion.edit',$solicitu->id)); ?>" class="btn btn-danger"><?php echo e($solicitu->estado); ?></td>
-                                       <?php elseif($solicitu->estado == "Aceptada"): ?>
+                                    <?php elseif($solicitu->estado == "Aceptada"): ?>
                                        <td  class="text-"><a href="<?php echo e(route('autorizacion.edit',$solicitu->id)); ?>" class="btn btn-warning"><?php echo e($solicitu->estado); ?></td>
-                                       <?php else: ?> <td  class="text-"><a href="<?php echo e(route('autorizacion.edit',$solicitu->id)); ?>" class="btn btn-success"><?php echo e($solicitu->estado); ?></td>
-                                       <?php endif; ?>
+                                    <?php else: ?> <td  class="text-"><a href="<?php echo e(route('autorizacion.edit',$solicitu->id)); ?>" class="btn btn-success"><?php echo e($solicitu->estado); ?></td>
+                                    <?php endif; ?>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
@@ -95,4 +97,4 @@
 //     </script>
     <?php $__env->stopSection(); ?>
    
-<?php echo $__env->make('layouts.main', ['activePage' => 'Autorizacion', 'titlePage' => __('Autorizacion')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\refrigerios\resources\views/autorizacion/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main', ['activePage' => 'autorizacion', 'titlePage' => __('Autorizacion de solicitudes')], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\refrigerios\resources\views/autorizacion/index.blade.php ENDPATH**/ ?>

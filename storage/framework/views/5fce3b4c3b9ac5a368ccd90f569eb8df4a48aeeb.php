@@ -8,7 +8,7 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-
+     
       <li class="nav-item<?php echo e($activePage == 'Solicitud' ? ' active' : ''); ?>">
         <a class="nav-link" href="<?php echo e(route('solicitud')); ?>">
           <i class="material-icons">content_paste</i>
@@ -16,6 +16,12 @@
         </a>
       </li>
       <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role_index')): ?>
+      <li class="nav-item<?php echo e($activePage == 'reportess' ? ' active' : ''); ?>">
+        <a class="nav-link" href="<?php echo e(route('reportess')); ?>">
+          <i class="material-icons">store</i>
+          <p><?php echo e(__('Reportes ')); ?></p>
+        </a>
+      </li>
       <li class="nav-item<?php echo e($activePage == 'Especial' ? ' active' : ''); ?>">
         <a class="nav-link" href="<?php echo e(route('especial')); ?>">
           <i class="material-icons">content_paste</i>
@@ -23,7 +29,7 @@
         </a>
       </li>
 
-      <li class="nav-item<?php echo e($activePage == 'Autorizacion' ? ' active' : ''); ?>">
+      <li class="nav-item<?php echo e($activePage == 'autorizacion' ? ' active' : ''); ?>">
         <a class="nav-link" href="<?php echo e(route('autorizacion.index')); ?>">
           <i class="material-icons">
             done    

@@ -17,9 +17,9 @@ class ProductosController extends Controller
     public function index()
     {
      
-        $productos = Productos::all();
+        $productos = Productos::paginate(5);
         $proveedores['proveedores'] = proveedores::all();
-        //dd($proveedores);
+        // dd($proveedores);
        // $productos = Productos::select('nombreprocee')->get->load('proveedores');
         //,'dd($proveedores);
         // $productos = \DB::table('proveedores')

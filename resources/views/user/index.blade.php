@@ -13,11 +13,11 @@
                             </div>
                             <div class="card-body ">
                                 <div class="card-body">
-                                    <!-- <div class="row">
+                                    {{-- <-- <div class="row">
                                         <div class="col-12 text-right">
                                             <a href="{{ route('user.create') }}" class="btn btn-sm btn-facebook">Añadir permiso</a>
                                         </div>
-                                    </div> -->
+                                    </div> --> --}}
                                     <div class="table-responsive">
                                         <table class="table ">
                                             <thead class="text-primary">
@@ -33,21 +33,21 @@
                                                 <tr>
                                                     <td>{{ $user->username}}</td>
                                                     <td>{{ $user->name}}{{ $user->apellidos}}</td>
-                                                    <!-- <td>{{ $user->created_at}}</td> -->
+                                                   {{-- <td>{{ $user->created_at}}</td> --> --}}
                                                     <td>
                                                         @forelse($user->roles as $role)
                                                             <span class="badge badge-info">{{  $role->name }}</span>
                                                         @empty 
-                                                            <span class="badge badge-info">sin rol</span>
+                                                            <span class="badge badge-danger">No tiene permisos</span>
                                                         @endforelse
                                                     </td>
-                                                    <!-- <td>
+                                                     {{-- <td>
                                                         @forelse($user->permissions as $permission)
                                                         <span class="badge badge-info">{{ $permission->name }}</span>
                                                         @empty
                                                         <span class="badge badge-danger">No tiene permisos</span>
                                                         @endforelse
-                                                    </td> -->
+                                                    </td>  --}}
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('user.show',$user->id) }}" class="btn btn-info">
                                                             <i class="material-icons">person</i></a>

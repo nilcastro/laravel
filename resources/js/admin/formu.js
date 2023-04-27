@@ -14,20 +14,6 @@
 
    
     });
-   
- 
-
-
-
-
-
-   
-   // alert("hola");
-
-
-
-
-
   
     //alert("hola");
     $("#Nombreprove").on('change', function() {

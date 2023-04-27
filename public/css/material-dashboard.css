@@ -69,8 +69,9 @@ body {
 
 hr {
   box-sizing: content-box;
-  height: 0;
+  height: 1px;
   overflow: visible;
+  background-color: #b400b4;
 }
 
 h1,
@@ -415,7 +416,7 @@ template {
   }
   .table td,
   .table th {
-    background-color: #fff !important;
+    background-color: rgb(136, 135, 135) !important;
   }
   .table-bordered th,
   .table-bordered td {
@@ -1883,7 +1884,7 @@ pre code {
 
 .table-sm th,
 .table-sm td {
-  padding: 0.3rem;
+  padding: 0.0rem;
 }
 
 .table-bordered {
@@ -2081,7 +2082,7 @@ pre code {
 @media (max-width: 575.98px) {
   .table-responsive-sm {
     display: block;
-    width: 100%;
+    width: 110%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -5539,7 +5540,7 @@ button.close {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: auto;
   pointer-events: auto;
   background-color: #ffffff;
   background-clip: padding-box;
@@ -5619,7 +5620,7 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 900px;
     margin: 1.75rem auto;
   }
   .modal-dialog-centered {
@@ -5629,13 +5630,13 @@ button.close {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
   }
   .modal-sm {
-    max-width: 300px;
+    max-width: 900px;
   }
 }
 
 @media (min-width: 992px) {
   .modal-lg {
-    max-width: 800px;
+    max-width: 900px;
   }
 }
 
@@ -14884,8 +14885,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .main-panel>.content {
   margin-top: 70px;
-  padding: 30px 15px;
-  min-height: calc(100vh - 123px);
+  /* padding: 30px 15px; */
+  min-height: calc(100vh - 150px);
 }
 
 .main-panel>.footer {
@@ -16622,7 +16623,7 @@ label {
 
 .card {
   border: 0;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-top: 30px;
   border-radius: 6px;
   color: #333333;
@@ -16968,7 +16969,7 @@ label {
 }
 
 .card .card-body {
-  padding: 0.9375rem 20px;
+  padding: 0.9375rem 9px;
   position: relative;
 }
 

@@ -3,23 +3,24 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-                <div class="col-md-12">
+            <div class="col-md-12">
                 <form method="POST" action="{{ route('user.update', $user->id) }}"  class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">
                             <div class="card-header card-header-primary">
                                 <h4 class="card-title">Editar usuarios</h4>
-                                <p class="card-category">Agregar nuevos permisos</p>
+                                <p class="card-category">Asignar rol</p>
                             </div>
-                            @foreach($user as $use)
-                            <div class="card-body ">
-                             
+                         
+                            <div class="card-body "> 
+                                @foreach($user as $use)
+                                
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label" for="input-name">Nombre</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control"  type="text" name="name" id="name" placeholder="Current Password" value="{{ $user->name }} {{ $user->apellidos }}" required>
+                                            <input class="form-control"  type="text" name="name" id="name"  value="{{ $user->name }} {{ $user->apellidos }}" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -27,7 +28,7 @@
                                     <label class="col-sm-2 col-form-label" for="input-password">ID</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control" name="username" id="username" type="text" placeholder="New Password" value="{{ $user->username}}" required="">
+                                            <input class="form-control" name="username" id="username" type="text"  value="{{ $user->username}}" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -35,12 +36,12 @@
                                     <label class="col-sm-2 col-form-label" for="input-password">Correo eletronico</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
-                                            <input class="form-control" name="email" id="email" type="text" placeholder="New Password" value="{{ $user->email}}" required="">
+                                            <input class="form-control" name="email" id="email" type="text"  value="{{ $user->email}}" required="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label" for="input-password">Correo eletronico</label>
+                                    <label class="col-sm-2 col-form-label" for="input-password">Cargo</label>
                                     <div class="col-sm-7">
                                         <div class="form-group bmd-form-group">
                                             <input class="form-control" name="cargo" id="cargo" type="text" placeholder="New Password" value="{{ $user->cargo}}" required="">
@@ -48,6 +49,7 @@
                                     </div>
                                 </div>
                          @endforeach
+                         
                         <div class="row">
                             <label class="col-sm-2 col-form-label" for="input-password-confirmation">Permisos</label>
                                 <div class="col-sm-7">
